@@ -1,0 +1,104 @@
+id: on-device-csam-blocking
+label: "On-Device CSAM File-Blocking"
+aliases:
+  - "client-side scanning"
+  - "on-device detection"
+
+domain: technology
+category: on-device
+
+definition: >-
+  Interventions that run on a user's own device and act on abuse material before it
+  leaves that device — blocking a file from being sent, saved, or uploaded, rather
+  than detecting it server-side after transmission. Distinct from server-side hash
+  matching in where the computation happens and therefore in what it can see, what
+  it can prove, and what it puts at risk.
+
+why_it_matters: >-
+  Server-side detection cannot see inside end-to-end encrypted channels, which is
+  where a growing share of distribution and coercion occurs. On-device approaches are
+  the main proposal for closing that gap, and they are also the most contested
+  proposal in the field: the same mechanism that blocks abuse material is a general
+  content-inspection capability sitting on every device that ships it.
+
+current_understanding: >-
+  Proposals have been advanced by platforms and by legislators in multiple
+  jurisdictions, and withdrawn or stalled under sustained technical and civil-liberties
+  criticism. The security research community has argued that client-side scanning
+  creates risks that are difficult to bound — scope creep, adversarial evasion, false
+  accusation, and coercion of the matching list by third parties. No deployment at
+  consumer scale has both shipped and survived review. The question of whether a
+  narrowly scoped blocking mechanism differs meaningfully from general scanning
+  remains open.
+
+open_questions:
+  - Does blocking at the point of send differ, in risk terms, from scanning at rest?
+  - Can a matching list be made auditable without disclosing its contents?
+  - What would independent verification of an on-device mechanism look like in practice?
+
+maturity: active
+
+intervention_point: [platform_prevention, detection_monitoring]
+affordance_class: [production, possession_trade]
+lifecycle_stage: [exploitation, maintenance]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/detection#ContentHashingTool
+    - https://cacontology.projectvic.org/detection#DatabaseMatchingTool
+    - https://cacontology.projectvic.org/detection#ContentHashingAction
+    - https://cacontology.projectvic.org/platforms#Ephemerality
+  notes: >-
+    Detection tooling and hashing actions are modelled, but the ontology does not
+    distinguish where detection executes. On-device and server-side matching are
+    materially different in evidentiary chain, in what the platform can attest to, and
+    in the rights posture. A locus-of-execution property on detection actions, or a
+    ClientSideDetection subclass, would let the two be told apart in a case graph.
+
+threads:
+  - id: proposal-comparison
+    title: "Compare published on-device proposals against a common set of criteria"
+    detail: >-
+      Several concrete proposals have been published by platforms, regulators, and
+      academics. They are usually discussed one at a time and in isolation. Build a
+      side-by-side comparison on shared criteria — threat model, what is matched, who
+      controls the list, what the device attests to, failure modes, and what
+      independent verification would require.
+    kind: research
+    effort: medium
+    status: open
+    skills: [security, cryptography, policy-analysis]
+    done_when:
+      - A published comparison table covering at least four named proposals
+      - Each row sourced to a primary public document
+      - An explicit statement of criteria and why those criteria were chosen
+  - id: cac-locus-of-execution
+    title: "Propose a locus-of-execution distinction for detection actions in CAC"
+    detail: >-
+      Draft a class or property so a case graph can record that detection happened on
+      a device rather than on a server, and take it upstream to Project VIC.
+    kind: ontology
+    effort: small
+    status: open
+    skills: [semantic-web, knowledge-graphs]
+    done_when:
+      - A drafted class or property with an rdfs:comment and a SHACL shape
+      - An issue or pull request opened on the CAC Ontology repository
+
+references:
+  - title: "Bugs in our Pockets: The Risks of Client-Side Scanning"
+    url: https://arxiv.org/abs/2110.07450
+    type: paper
+    date: "2021"
+    note: "The principal technical critique; the reference point most later work argues with."
+  - title: "CAC Ontology — detection module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics: [hash-matching-coverage]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

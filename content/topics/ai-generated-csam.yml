@@ -1,0 +1,105 @@
+id: ai-generated-csam
+label: "AI-Generated CSAM"
+aliases:
+  - "AI-CSAM"
+  - "synthetic CSAM"
+  - "generative abuse imagery"
+
+domain: vectors
+category: ai-csam
+
+definition: >-
+  Abuse material produced wholly or partly by generative models. Spans fully synthetic
+  imagery depicting no identifiable child, material generated from a real child's
+  likeness without contact, and existing material altered by a model. The three carry
+  different legal treatment, different detection problems, and different harms, and
+  are frequently discussed as if they were one thing.
+
+why_it_matters: >-
+  Generative synthesis is the first mechanism in the enforcement record that produces
+  abuse imagery without an offender ever contacting a child. It also breaks the
+  assumption underneath the detection layer: hash matching identifies known material,
+  and synthesised material is novel by construction. Reported volumes have grown
+  sharply while legal frameworks, victim-identification workflows, and investigator
+  training are all still forming.
+
+current_understanding: >-
+  Reporting volumes attributed to AI-generated material have risen by roughly an order
+  of magnitude year over year in published hotline figures. Prosecutions have begun in
+  several jurisdictions under existing statute, with mixed reliance on obscenity,
+  morphing, and CSAM provisions depending on whether an identifiable minor is depicted.
+  Detection research is active but has no equivalent of a shared hash list. A recurring
+  argument holds that the harm type activated by synthesis is not new even though the
+  mechanism is — the affordance is novel, the victim-facing harm predates it.
+
+open_questions:
+  - What detection signal generalises across model families rather than fingerprinting one generator?
+  - How should triage rank synthetic material against material depicting an identifiable child in active abuse?
+  - Does availability of synthetic material change contact-offending rates in either direction? The evidence base is thin and contested.
+
+maturity: emerging
+
+intervention_point: [platform_prevention, detection_monitoring, legal_intervention]
+affordance_class: [production, possession_trade]
+lifecycle_stage: [exploitation, maintenance]
+
+cac_alignment:
+  status: aligned
+  classes:
+    - https://cacontology.projectvic.org/ai-csam#AIGeneratedCSAM
+    - https://cacontology.projectvic.org/ai-csam#SyntheticMediaCSAM
+    - https://cacontology.projectvic.org/ai-csam#AIAlteredCSAM
+    - https://cacontology.projectvic.org/ai-csam#AIContentDetection
+    - https://cacontology.projectvic.org/ai-csam#AICSAMInvestigation
+  notes: >-
+    The ai-csam module distinguishes fully generated, synthetic, and altered material,
+    which is the distinction that matters most for both charging and detection.
+
+threads:
+  - id: statute-survey
+    title: "Survey how jurisdictions charge AI-generated material"
+    detail: >-
+      Charging practice varies by whether an identifiable minor is depicted and by
+      which statutory hook is available. Build a sourced survey across jurisdictions,
+      keyed to the three-way distinction the ontology already draws.
+    kind: policy
+    effort: medium
+    status: open
+    skills: [legal, policy-analysis, writing]
+    done_when:
+      - A jurisdiction-by-jurisdiction table with a primary source per row
+      - Explicit mapping of each charging approach to fully generated, altered, or likeness-based material
+  - id: detection-benchmark-gap
+    title: "Document what an honest AI-CSAM detection benchmark would require"
+    detail: >-
+      Detection claims are hard to compare because no shared evaluation exists and the
+      material cannot be circulated. Write up what a benchmark would need — proxy
+      datasets, evaluation protocol, what can be measured without possessing material.
+    kind: evaluation
+    effort: medium
+    status: open
+    skills: [ml, computer-vision, evaluation]
+    done_when:
+      - A written protocol that does not require handling illegal material
+      - Named proxy tasks with a stated argument for why they transfer
+
+references:
+  - title: "How AI is being abused to create child sexual abuse imagery"
+    url: https://www.iwf.org.uk/about-us/why-we-exist/our-research/how-ai-is-being-abused-to-create-child-sexual-abuse-imagery/
+    type: report
+    publisher: "Internet Watch Foundation"
+  - title: "CyberTipline Data"
+    url: https://www.missingkids.org/cybertiplinedata
+    type: report
+    publisher: "NCMEC"
+    note: "Annual reporting volumes, including material attributed to generative AI."
+  - title: "CAC Ontology — ai-csam module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics: [platform-affordance-misuse, hash-matching-coverage]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

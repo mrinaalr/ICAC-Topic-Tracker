@@ -1,0 +1,43 @@
+name: Claim a thread
+description: Tell everyone you are picking up an open piece of work.
+title: "Claim: "
+labels: ["thread-claim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Claiming exists so two people do not silently duplicate each other.
+        You do not need permission to start.
+  - type: input
+    id: topic
+    attributes:
+      label: Topic id
+      placeholder: platform-affordance-misuse
+    validations:
+      required: true
+  - type: input
+    id: thread
+    attributes:
+      label: Thread id
+      placeholder: pre-deployment-review-checklist
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: How you plan to approach it
+      description: A few sentences. Enough that someone can tell whether their plan overlaps yours.
+    validations:
+      required: true
+  - type: input
+    id: timeline
+    attributes:
+      label: Rough timeline
+      placeholder: "A few weeks, part time"
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: My work will rely only on public sources, per SCOPE.md.
+          required: true

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report suspected child exploitation
+    url: https://report.cybertip.org/
+    about: >-
+      This repository cannot act on reports and is not monitored for them.
+      In the US, report to the NCMEC CyberTipline, or call 911 if a child is in
+      immediate danger.
+  - name: Scope question
+    url: https://github.com/mrinaalr/ICAC-Topic-Tracker/blob/main/SCOPE.md
+    about: What belongs here and what does not, before you file.

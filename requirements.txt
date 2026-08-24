@@ -1,0 +1,3 @@
+# Tooling dependencies. The published site itself has zero runtime dependencies.
+PyYAML>=6.0.1
+jsonschema>=4.21.0

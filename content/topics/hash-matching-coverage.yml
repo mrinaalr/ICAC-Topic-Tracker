@@ -1,0 +1,91 @@
+id: hash-matching-coverage
+label: "Hash-Matching Coverage Limits"
+aliases:
+  - "PhotoDNA limits"
+  - "known-material detection"
+
+domain: technology
+category: detection
+
+definition: >-
+  Perceptual and cryptographic hash matching identifies material already present in a
+  curated list. Coverage limits are the class of material it structurally cannot
+  reach: newly produced imagery, synthesised imagery, material never submitted to a
+  list, and material inside channels the matcher cannot observe.
+
+why_it_matters: >-
+  Hash matching is the load-bearing component of platform-side detection and it works
+  well for what it is designed to do. The problem is that it answers exactly one
+  question — is this file known illegal material — and the questions that determine
+  whether a case is workable are different ones: which capability made the offense
+  possible, whether an active victim is in contact, how this case relates to others.
+  Building detection faster than investigation produces volume that the downstream
+  pipeline cannot absorb.
+
+current_understanding: >-
+  Deployment is broad across major platforms, and reported accuracy for known material
+  is high. Published reporting volumes now run in the tens of millions of incidents
+  annually, dominated by possession and distribution, while contact and grooming
+  offenses remain comparatively under-detected. Novel-material classifiers exist but
+  carry a different error profile and a different evidentiary posture. The structural
+  point is not that hash matching underperforms; it is that its coverage boundary and
+  the enforcement bottleneck are two separate problems that are often argued as one.
+
+open_questions:
+  - What share of first-detection events would be missed by hash matching alone, and can that be estimated from public data?
+  - How should novel-material classifier output be represented so it is distinguishable from a hash hit downstream?
+  - Where does added detection capacity help, and where does it only move the bottleneck?
+
+maturity: established
+
+intervention_point: [detection_monitoring, reporting_intake]
+affordance_class: [possession_trade]
+lifecycle_stage: [exploitation, maintenance]
+
+cac_alignment:
+  status: aligned
+  classes:
+    - https://cacontology.projectvic.org/detection#PhotoDNAHash
+    - https://cacontology.projectvic.org/detection#ContentHashingTool
+    - https://cacontology.projectvic.org/detection#DatabaseMatchingTool
+    - https://cacontology.projectvic.org/detection#HashComparisonPhase
+  notes: >-
+    Hashing tools, matching tools, and the comparison phase are all modelled in the
+    detection module.
+
+threads:
+  - id: coverage-estimate
+    title: "Estimate the share of cases where hash matching was the first detection event"
+    detail: >-
+      Public case narratives often state how a case originated — a CyberTip, a
+      proactive investigation, an undercover operation, a report from a third party.
+      Aggregating that field gives a defensible estimate of how much of the record
+      hash matching actually originates, and how much arrives another way.
+    kind: dataset
+    effort: medium
+    status: open
+    skills: [data-engineering, nlp, statistics]
+    done_when:
+      - An origination breakdown over a public corpus with stated sample size
+      - Explicit treatment of cases where origination is not stated
+      - Method and code published so the figure can be reproduced
+
+references:
+  - title: "CyberTipline Data"
+    url: https://www.missingkids.org/cybertiplinedata
+    type: report
+    publisher: "NCMEC"
+  - title: "CaseLinker"
+    url: https://github.com/mrinaalr/CaseLinker
+    type: code
+    note: "Extracts investigation-origination fields from public enforcement narratives."
+  - title: "CAC Ontology — detection module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics: [ai-generated-csam, on-device-csam-blocking, cybertip-triage-quality]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

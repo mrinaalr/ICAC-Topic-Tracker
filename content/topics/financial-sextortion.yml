@@ -1,0 +1,103 @@
+id: financial-sextortion
+label: "Financially Motivated Sextortion"
+aliases:
+  - "financial sextortion"
+  - "sextortion for money"
+
+domain: vectors
+category: sextortion
+
+definition: >-
+  Sextortion in which the demand is money rather than further imagery. An offender
+  acquires an intimate image, usually by deception over a short contact window, then
+  threatens exposure unless payment is made. Distinguished from imagery-motivated
+  sextortion by the demand type, the compressed timeline, and a markedly different
+  victim profile.
+
+why_it_matters: >-
+  The pattern scales in a way that imagery-motivated sextortion does not: the offender
+  does not need sustained access to a specific child, contact-to-demand can run in
+  hours, and the operation parallelises across many targets at once. Victim
+  demographics invert the usual profile, skewing toward adolescent boys. Reported
+  volumes have risen sharply, and the compressed timeline leaves a very narrow window
+  for any intervention that depends on detection and response.
+
+current_understanding: >-
+  Public advisories describe a consistent script: contact on a mainstream platform
+  using a fabricated persona, rapid escalation to intimate imagery, migration to a
+  second channel, then a payment demand backed by threat of exposure to the victim's
+  contact list. Payment is typically requested through gift cards, peer-to-peer
+  payment apps, or cryptocurrency. Retained imagery keeps the leverage alive after any
+  single account is banned, which is why account-level enforcement alone does not end
+  the coercion.
+
+open_questions:
+  - Where in the compressed timeline can intervention realistically land?
+  - Do payment-rail signals generalise well enough to support upstream disruption?
+  - What messaging actually reduces the harm of the initial threat once imagery exists?
+
+maturity: active
+
+intervention_point: [platform_prevention, detection_monitoring, victim_safeguarding, investigation_attribution]
+affordance_class: [contact_approach, production, possession_trade]
+lifecycle_stage: [initial_contact, conditioning, exploitation, maintenance]
+
+cac_alignment:
+  status: aligned
+  classes:
+    - https://cacontology.projectvic.org/sextortion#MonetaryDemand
+    - https://cacontology.projectvic.org/sextortion#ExtortionDemand
+    - https://cacontology.projectvic.org/sextortion#GiftCardDemand
+    - https://cacontology.projectvic.org/sextortion#CoercionCycle
+    - https://cacontology.projectvic.org/sextortion#ThreatMechanism
+    - https://cacontology.projectvic.org/platforms#ChannelMigrationEvent
+  notes: >-
+    The sextortion module models demand type, threat mechanism, and the coercion cycle
+    directly, and channel migration is available from the platforms module.
+
+threads:
+  - id: timeline-measurement
+    title: "Measure the contact-to-demand interval from public records"
+    detail: >-
+      Intervention design depends on how much time actually exists between first
+      contact and first demand. Public advisories describe it qualitatively as hours.
+      Extract what public case records and charging documents actually state.
+    kind: research
+    effort: small
+    status: open
+    skills: [data-engineering, statistics]
+    done_when:
+      - A distribution of stated intervals with sample size and source per observation
+      - An explicit account of selection bias in the underlying records
+  - id: payment-rail-signals
+    title: "Catalogue publicly documented payment-rail disruption approaches"
+    detail: >-
+      Payment providers sit at a chokepoint in the financial variant. Catalogue what
+      has been publicly described, by whom, and with what reported effect.
+    kind: research
+    effort: small
+    status: open
+    skills: [policy-analysis, trust-safety]
+    done_when:
+      - A sourced list of approaches with the organisation and date for each
+      - A note on which are verifiable from public reporting and which are claims
+
+references:
+  - title: "Sextortion"
+    url: https://www.fbi.gov/how-we-can-help-you/scams-and-safety/common-frauds-and-scams/sextortion
+    type: report
+    publisher: "Federal Bureau of Investigation"
+  - title: "Thorn research"
+    url: https://www.thorn.org/research/
+    type: report
+    publisher: "Thorn"
+  - title: "CAC Ontology — sextortion module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics: [exploitation-lifecycle-backbone]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

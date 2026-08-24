@@ -1,0 +1,19 @@
+# Generated site data — rebuilt by tools/build.py, never hand-edited
+site/data/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local scratch
+*.log
+tmp/

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICAC Topic Tracker</title>
+<meta name="description" content="Tracking issues, topics, and challenges in the Internet Crimes Against Children space so engineers, researchers, and other professionals can see them clearly and design interdictions.">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128269;</text></svg>">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#/">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>
+        <strong>ICAC Topic Tracker</strong>
+        <em>Internet Crimes Against Children</em>
+      </span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#/">Domains</a>
+      <a href="#/topics">All topics</a>
+      <a href="#/threads">Open work</a>
+      <a href="#/ontology">Ontology</a>
+      <a href="#/about">About</a>
+    </nav>
+    <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle colour theme">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </div>
+</header>
+
+<div class="searchbar">
+  <div class="wrap">
+    <label class="sr-only" for="q">Search topics</label>
+    <input id="q" type="search" placeholder="Search topics, aliases, threads, ontology classes…" autocomplete="off" spellcheck="false">
+    <div id="suggest" class="suggest" role="listbox" hidden></div>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <nav id="crumbs" class="crumbs" aria-label="Breadcrumb"></nav>
+  <div id="view" aria-live="polite"></div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-title">ICAC Topic Tracker</p>
+      <p class="muted small">
+        Public sources only. Not a tip line, not an investigation tool, and not a
+        place for law enforcement data. See
+        <a href="#/about">About &amp; scope</a>.
+      </p>
+    </div>
+    <div class="footer-meta">
+      <p class="muted small" id="build-meta"></p>
+      <p class="muted small">
+        <a href="https://github.com/mrinaalr/ICAC-Topic-Tracker">Repository</a> ·
+        <a href="https://github.com/mrinaalr/ICAC-Topic-Tracker/blob/main/CONTRIBUTING.md">Contribute</a> ·
+        MIT / CC&nbsp;BY&nbsp;4.0
+      </p>
+    </div>
+  </div>
+</footer>
+
+<template id="tpl-empty">
+  <div class="empty">
+    <p class="empty-title"></p>
+    <p class="muted"></p>
+  </div>
+</template>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

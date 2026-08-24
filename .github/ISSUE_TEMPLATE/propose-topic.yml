@@ -1,0 +1,50 @@
+name: Propose a topic
+description: Suggest a concept the tracker should cover.
+title: "Topic: "
+labels: ["topic-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you are ready to write it, you can skip this and open a pull request
+        directly — see CONTRIBUTING.md.
+  - type: input
+    id: label
+    attributes:
+      label: What is the concept called?
+      description: Use the name the field actually uses.
+    validations:
+      required: true
+  - type: input
+    id: category
+    attributes:
+      label: Where does it belong?
+      placeholder: "technology / on-device"
+    validations:
+      required: true
+  - type: textarea
+    id: definition
+    attributes:
+      label: What is it?
+      description: Two or three sentences. Definitional.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why should it be tracked?
+    validations:
+      required: true
+  - type: textarea
+    id: refs
+    attributes:
+      label: Public references
+      description: One per line. Must be openable without credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: cac
+    attributes:
+      label: CAC ontology classes, if you found any
+      description: |
+        Run `python3 tools/new_topic.py --search "your concept"`, or leave blank.

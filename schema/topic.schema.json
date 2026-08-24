@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mrinaalr.github.io/ICAC-Topic-Tracker/schema/topic.schema.json",
+  "title": "ICAC Topic",
+  "description": "A concept in the ICAC domain of discourse, tracked and anchored to the CAC Ontology. Enum values for domain, category, and facets are checked separately against content/taxonomy.yml by tools/validate.py, because they are data rather than schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "domain",
+    "category",
+    "definition",
+    "maturity",
+    "cac_alignment",
+    "references",
+    "created",
+    "updated"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 64,
+      "description": "Stable slug. Must match the filename stem. Never reuse or repurpose an id."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "description": "The name the domain actually uses for this concept."
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 2, "maxLength": 120 },
+      "uniqueItems": true,
+      "description": "Other names in circulation. Fed into search so people find the concept under whatever name they know."
+    },
+    "domain": { "type": "string", "description": "Taxonomy domain id." },
+    "category": { "type": "string", "description": "Taxonomy category id within the domain." },
+
+    "definition": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 1200,
+      "description": "What this concept means in this domain, in plain language. Definitional, not argumentative."
+    },
+    "why_it_matters": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Why the concept is worth tracking. This is where an argument belongs."
+    },
+    "current_understanding": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "The state of play, in prose. What is known, what is contested, what changed recently."
+    },
+    "open_questions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 10, "maxLength": 400 },
+      "description": "Questions the field has not settled. Distinct from threads, which are work someone can pick up."
+    },
+
+    "maturity": { "type": "string", "description": "Taxonomy facet: emerging | active | established | historical." },
+    "intervention_point": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "affordance_class": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "lifecycle_stage": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+
+    "cac_alignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "description": "How this concept sits against the CAC Ontology. The point of the tracker.",
+      "properties": {
+        "status": { "type": "string", "description": "aligned | partial | gap | proposed | out_of_scope" },
+        "classes": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "CAC classes that model this concept. Validated against content/cac-index.json — an unknown IRI fails the build.",
+          "items": {
+            "type": "string",
+            "pattern": "^https://cacontology\\.projectvic\\.org(/[a-z0-9-]+)*#[A-Za-z][A-Za-z0-9_-]*$"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "What is covered, what is missing, and what an extension would need to add."
+        },
+        "proposal_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "Upstream issue or PR, when status is proposed."
+        }
+      }
+    },
+
+    "threads": {
+      "type": "array",
+      "description": "Open work items attached to this topic. This is what a contributor picks up.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "kind", "effort", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "maxLength": 64,
+            "description": "Slug, unique within this topic."
+          },
+          "title": { "type": "string", "minLength": 8, "maxLength": 200 },
+          "detail": { "type": "string", "maxLength": 3000, "description": "What the work actually is." },
+          "kind": { "type": "string" },
+          "effort": { "type": "string" },
+          "status": { "type": "string" },
+          "skills": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "done_when": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 8, "maxLength": 400 },
+            "description": "Concrete completion criteria. A thread without these is a wish, not a task."
+          },
+          "claimed_by": {
+            "type": "string",
+            "pattern": "^@?[A-Za-z0-9][A-Za-z0-9-]{0,38}$",
+            "description": "GitHub handle of whoever picked it up."
+          },
+          "claimed_at": { "type": "string", "format": "date" },
+          "tracking_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "outcome": { "type": "string", "maxLength": 1000, "description": "Required in spirit once status is done or archived." },
+          "references": { "$ref": "#/$defs/references" }
+        }
+      }
+    },
+
+    "references": {
+      "$ref": "#/$defs/references",
+      "description": "Public sources only. At least one is required — a topic nobody has written about publicly is not yet trackable here."
+    },
+
+    "related_topics": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true,
+      "description": "Other topic ids. Validated for existence at build time; edges are rendered both ways."
+    },
+
+    "created": { "type": "string", "format": "date" },
+    "updated": { "type": "string", "format": "date" },
+    "maintainers": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^@?[A-Za-z0-9][A-Za-z0-9-]{0,38}$" },
+      "uniqueItems": true
+    }
+  },
+
+  "$defs": {
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "url", "type"],
+        "properties": {
+          "title": { "type": "string", "minLength": 3, "maxLength": 300 },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "description": "Must be https and publicly reachable without credentials. See SCOPE.md."
+          },
+          "type": { "type": "string" },
+          "publisher": { "type": "string", "maxLength": 200 },
+          "date": { "type": "string", "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$" },
+          "note": { "type": "string", "maxLength": 400 }
+        }
+      }
+    }
+  }
+}

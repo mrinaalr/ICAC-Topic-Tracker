@@ -1,0 +1,33 @@
+name: Validate content
+
+on:
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'schema/**'
+      - 'tools/**'
+      - 'requirements.txt'
+      - '.github/workflows/validate.yml'
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Schema, taxonomy, ontology, scope
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate topics
+        run: python3 tools/validate.py --strict
+
+      - name: Build site data
+        run: python3 tools/build.py --skip-validate

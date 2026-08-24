@@ -1,0 +1,95 @@
+id: analyst-secondary-trauma
+label: "Analyst Secondary Traumatic Stress"
+aliases:
+  - "vicarious trauma"
+  - "reviewer exposure"
+
+domain: research
+category: analyst-wellbeing
+
+definition: >-
+  Occupational stress reactions arising from repeated indirect exposure to traumatic
+  material — in this domain, from reviewing abuse imagery and case narratives.
+  Documented effects include intrusive thoughts, emotional numbing, and hypervigilance.
+  Applies to investigators, hotline analysts, platform moderators, and researchers alike.
+
+why_it_matters: >-
+  A substantial minority of personnel working in this area report high to severe
+  symptoms. That is a harm in itself, and it is also a constraint on system design:
+  throughput is bounded by how much material people can safely review, and turnover
+  destroys accumulated expertise. Tooling that reduces unnecessary exposure is
+  therefore both a welfare measure and a capacity measure, which is an unusual case
+  where the humane choice and the operational one point the same way.
+
+current_understanding: >-
+  The occupational-health literature on this population is established enough to
+  support prevalence claims and to identify recurring aggravating factors, including
+  volume, lack of control over exposure, and isolation. Mitigation practice is less
+  settled. Interface-level measures — structured summaries in place of raw narrative,
+  muted presentation, blurring and gradual disclosure, automatic highlighting so people
+  do not have to search manually — are widely recommended but rarely evaluated against
+  outcomes rather than against preference.
+
+open_questions:
+  - Which exposure-reduction measures actually reduce symptoms, as opposed to reducing reported discomfort?
+  - What is lost analytically when raw material is replaced by structured features, and where does that tradeoff stop being acceptable?
+  - Can exposure be budgeted per analyst in a way that survives operational pressure?
+
+maturity: established
+
+intervention_point: [reporting_intake, investigation_attribution]
+
+cac_alignment:
+  status: aligned
+  classes:
+    - https://cacontology.projectvic.org/analyst-wellbeing#SecondaryTraumaticStress
+    - https://cacontology.projectvic.org/analyst-wellbeing#VicariousTrauma
+    - https://cacontology.projectvic.org/analyst-wellbeing#ExposureMitigationMeasure
+  notes: >-
+    The analyst-wellbeing module models the condition and mitigation measures
+    directly. It is one of the smallest modules in the ontology, which is itself
+    informative about how the domain has prioritised this.
+
+threads:
+  - id: mitigation-inventory
+    title: "Inventory exposure-mitigation measures and what evidence backs each"
+    detail: >-
+      Interface and workflow mitigations are recommended widely and evaluated rarely.
+      Build an inventory that separates measures with outcome evidence from measures
+      adopted on plausibility, so tool builders can tell the two apart.
+    kind: research
+    effort: medium
+    status: open
+    skills: [hci, clinical, writing]
+    done_when:
+      - An inventory with an evidence grade and citation per measure
+      - Explicit identification of measures that are widely adopted but unevaluated
+  - id: exposure-budget-pattern
+    title: "Prototype an exposure-budget pattern for review tooling"
+    detail: >-
+      Design and prototype a pattern where a tool tracks and caps how much raw material
+      a reviewer is shown per session, with structured alternatives offered first.
+    kind: build
+    effort: medium
+    status: open
+    skills: [hci, frontend]
+    done_when:
+      - A working prototype demonstrating the pattern on non-sensitive stand-in data
+      - A written account of where the pattern conflicts with investigative need
+
+references:
+  - title: "The Impact of Internet Crimes Against Children Work on Relationships with Families and Friends: An Exploratory Study"
+    url: https://link.springer.com/article/10.1007/s10896-015-9680-3
+    type: paper
+    publisher: "Journal of Family Violence"
+    date: "2015"
+  - title: "CAC Ontology — analyst-wellbeing module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics: [cybertip-triage-quality]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

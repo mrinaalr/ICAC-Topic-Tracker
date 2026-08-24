@@ -1,0 +1,424 @@
+# ICAC Topic Tracker — taxonomy
+#
+# Single source of truth for how the tracker is organised. The drill-down
+# navigation, the filter controls, and schema validation are all generated from
+# this file. Add a category here and it appears in the UI; nothing else changes.
+#
+# Every category declares the CAC Ontology modules that cover it. That mapping
+# is what makes the tracker a view onto the ICAC domain of discourse rather than
+# a loose list of themes: a topic filed under a category can be checked against
+# the classes those modules actually define, and a topic with no matching class
+# is surfaced as an ontology gap.
+#
+#   CAC Ontology — https://github.com/Project-VIC-International/CAC-Ontology
+#   Namespace     — https://cacontology.projectvic.org
+#   Shepherd      — Project VIC International (Apache-2.0)
+#
+# See docs/TAXONOMY.md for the rationale and docs/CAC_ALIGNMENT.md for how the
+# alignment check works.
+
+version: 1
+updated: "2026-08-24"
+
+# ---------------------------------------------------------------------------
+# Domains — the top-level boxes on the landing page.
+# ---------------------------------------------------------------------------
+domains:
+  - id: vectors
+    label: Exploitation Vectors
+    blurb: How children are reached, coerced, and harmed. Organised by offense type rather than by technology.
+    accent: "#c2410c"
+    categories:
+      - id: grooming
+        label: Grooming & Enticement
+        blurb: Sustained relationship-building toward sexual exploitation or in-person contact.
+        cac_modules: [grooming, custodial]
+      - id: sextortion
+        label: Sextortion
+        blurb: Coercion using acquired imagery, including financially motivated sextortion.
+        cac_modules: [sextortion]
+      - id: csam
+        label: CSAM Production & Distribution
+        blurb: Creation, trading, storage, and recirculation of abuse material.
+        cac_modules: [production, detection]
+      - id: ai-csam
+        label: AI-Generated CSAM
+        blurb: Synthetic and partially synthetic abuse material, including likeness synthesis of real minors.
+        cac_modules: [ai-csam]
+      - id: luring
+        label: Online Luring & Gaming
+        blurb: Contact and manipulation inside games, virtual worlds, and voice channels.
+        cac_modules: [grooming, platforms]
+      - id: networks
+        label: Organised Criminal Networks
+        blurb: Multi-actor enterprises with role specialisation operating across platforms.
+        cac_modules: [recruitment-networks, extremist-enterprises, sadistic-online-exploitation]
+      - id: trafficking
+        label: Trafficking & Commercial Exploitation
+        blurb: Recruitment, control, advertising, and commercial sexual exploitation of minors.
+        cac_modules: [sex-trafficking, street-recruitment]
+      - id: familial
+        label: Familial & Custodial Abuse
+        blurb: Abuse by a caregiver or a person in a position of trust, and its digital traces.
+        cac_modules: [custodial, institutional-exploitation, educational-exploitation, athletic-exploitation]
+      - id: abduction
+        label: Abduction & Coercive Contact
+        blurb: Stranger abduction, weapon-based coercion, and online contact that escalates offline.
+        cac_modules: [stranger-abduction]
+
+  - id: technology
+    label: Technology
+    blurb: The capabilities offenders reach for, and the technology built to disrupt them.
+    accent: "#1d4ed8"
+    categories:
+      - id: generative-ai
+        label: Generative AI & Deepfakes
+        blurb: Image, video, voice, and persona synthesis, and detection of synthesised material.
+        cac_modules: [ai-csam, detection]
+      - id: platform-design
+        label: Platform Design & Affordances
+        blurb: Product decisions that create or close misuse surfaces before deployment.
+        cac_modules: [platforms, platform-infrastructure]
+      - id: detection
+        label: Detection, Hashing & Classification
+        blurb: Known-material matching, novel-material classification, and their failure modes.
+        cac_modules: [detection, forensics]
+      - id: encryption-anonymity
+        label: Encryption & Anonymity
+        blurb: End-to-end encryption, anonymisation, and lawful-access tradeoffs.
+        cac_modules: [platforms, forensics]
+      - id: on-device
+        label: On-Device & Client-Side
+        blurb: Client-side interventions that act before material leaves the device.
+        cac_modules: [detection, forensics, platform-infrastructure]
+      - id: gaming-xr
+        label: Gaming, VR & Immersive
+        blurb: Game platforms, voice chat, avatars, and volumetric or spatial capture.
+        cac_modules: [platforms]
+      - id: age-assurance
+        label: Age Assurance & Identity
+        blurb: Establishing that a user is a minor, or that an adult is not posing as one.
+        cac_modules: [platforms, prevention]
+      - id: payments
+        label: Payments & Financial Rails
+        blurb: Payment infrastructure used in financially motivated sextortion and commercial exploitation.
+        cac_modules: [sextortion, asset-forfeiture]
+      - id: forensics-tooling
+        label: Forensic Tooling
+        blurb: Acquisition, triage, and analysis of seized devices and cloud accounts.
+        cac_modules: [forensics, physical-evidence]
+
+  - id: policy-le
+    label: Policy & Law Enforcement
+    blurb: Statute, reporting obligations, investigative capacity, and what the enforcement pipeline can absorb.
+    accent: "#15803d"
+    categories:
+      - id: legal-frameworks
+        label: Legal Frameworks & Statute
+        blurb: Criminal statute, mandatory reporting, jurisdiction, and gaps in coverage.
+        cac_modules: [usa-federal-law, usa-legislative, legal-harmonization]
+      - id: reporting-intake
+        label: Reporting & Intake
+        blurb: CyberTipline flow, report quality, routing, and triage at the point of receipt.
+        cac_modules: [us-ncmec, hotlines]
+      - id: investigation
+        label: Investigation & Attribution
+        blurb: Identifying offenders and active victims from what a report actually contains.
+        cac_modules: [investigation-coordination, undercover, tactical, case-management]
+      - id: prosecution
+        label: Prosecution & Disruption
+        blurb: Charging, evidentiary standards, sentencing, and network disruption.
+        cac_modules: [legal-outcomes, asset-forfeiture, recantation]
+      - id: victim-services
+        label: Victim Safeguarding & Services
+        blurb: Identification, removal of material, notification, and long-term support.
+        cac_modules: [victim-impact, recantation]
+      - id: capacity
+        label: Task Force Capacity & Workforce
+        blurb: Staffing, funding, training, tooling, and throughput across the task force network.
+        cac_modules: [taskforce, specialized-units, training]
+      - id: jurisdiction
+        label: Jurisdiction & International
+        blurb: Cross-border cooperation, MLATs, and multi-jurisdictional operations.
+        cac_modules: [multi-jurisdiction, international, legal-harmonization]
+      - id: transparency
+        label: Platform Transparency & Accountability
+        blurb: What platforms disclose, what they are obliged to disclose, and how it is verified.
+        cac_modules: [partnerships, platforms]
+      - id: integrity
+        label: Institutional Integrity
+        blurb: Corruption, insider threat, and registry compliance failures inside the response system.
+        cac_modules: [law-enforcement-corruption, sex-offender-registry]
+
+  - id: research
+    label: Research & Data
+    blurb: What the field cannot currently measure, and the infrastructure that would let it.
+    accent: "#6d28d9"
+    categories:
+      - id: data-gaps
+        label: Data & Measurement Gaps
+        blurb: What the public record cannot see, and methods that would surface it.
+        cac_modules: [synthesis, case-management]
+      - id: interoperability
+        label: Ontology & Interoperability
+        blurb: Shared vocabularies, schema alignment, and cross-organisation data exchange.
+        cac_modules: [core-spine, core, integration-patterns, synthesis, temporal]
+      - id: prevention
+        label: Prevention & Offender Deterrence
+        blurb: Reducing offending before it starts, including deterrence and help-seeking pathways.
+        cac_modules: [prevention]
+      - id: analyst-wellbeing
+        label: Analyst Wellbeing
+        blurb: Secondary traumatic stress, exposure reduction, and tooling that protects the people doing this work.
+        cac_modules: [analyst-wellbeing]
+      - id: evaluation
+        label: Evaluation & Benchmarks
+        blurb: Benchmarks, ground truth, and honest evaluation of tools that claim to help.
+        cac_modules: [detection, synthesis]
+
+# ---------------------------------------------------------------------------
+# Cross-cutting facets. Every topic may carry these regardless of category.
+# They are what make the tracker queryable rather than merely browsable.
+# ---------------------------------------------------------------------------
+facets:
+  maturity:
+    label: Maturity
+    multi: false
+    required: true
+    blurb: How settled this concept is in the domain of discourse.
+    values:
+      - id: emerging
+        label: Emerging
+        blurb: Appearing in reporting; not yet named consistently.
+      - id: active
+        label: Active
+        blurb: Named and discussed, still evolving.
+      - id: established
+        label: Established
+        blurb: Stable definition, widely used.
+      - id: historical
+        label: Historical
+        blurb: Largely superseded, retained for the record.
+
+  cac_status:
+    label: CAC alignment
+    multi: false
+    required: true
+    blurb: Whether the CAC Ontology models this concept.
+    values:
+      - id: aligned
+        label: Aligned
+        blurb: One or more CAC classes model this concept directly.
+      - id: partial
+        label: Partial
+        blurb: CAC models part of it; something material is missing.
+      - id: gap
+        label: Gap
+        blurb: The domain discusses it; CAC has no class for it.
+      - id: proposed
+        label: Proposed
+        blurb: An extension has been proposed upstream.
+      - id: out_of_scope
+        label: Out of scope
+        blurb: Real concept, but outside what CAC is meant to model.
+
+  intervention_point:
+    label: Intervention point
+    multi: true
+    required: false
+    blurb: Where in the pipeline work on this topic would apply pressure.
+    values:
+      - id: platform_prevention
+        label: Platform prevention
+      - id: detection_monitoring
+        label: Detection & monitoring
+      - id: reporting_intake
+        label: Reporting & intake
+      - id: investigation_attribution
+        label: Investigation & attribution
+      - id: legal_intervention
+        label: Legal intervention
+      - id: prosecution_disruption
+        label: Prosecution & disruption
+      - id: victim_safeguarding
+        label: Victim safeguarding
+
+  affordance_class:
+    label: Affordance class
+    multi: true
+    required: false
+    blurb: Which class of platform capability the topic concerns.
+    values:
+      - id: contact_approach
+        label: Contact & approach
+      - id: production
+        label: Production
+      - id: possession_trade
+        label: Possession & trade
+      - id: coordination
+        label: Coordination
+
+  lifecycle_stage:
+    label: Lifecycle stage
+    multi: true
+    required: false
+    blurb: Which stage of the exploitation backbone the topic touches.
+    values:
+      - id: initial_contact
+        label: Initial contact
+      - id: conditioning
+        label: Conditioning
+      - id: exploitation
+        label: Exploitation
+      - id: maintenance
+        label: Maintenance
+
+# ---------------------------------------------------------------------------
+# Thread facets — threads are the open work items attached to a topic.
+# ---------------------------------------------------------------------------
+thread_facets:
+  kind:
+    label: Kind of work
+    multi: false
+    required: true
+    values:
+      - id: build
+        label: Build
+        blurb: Ship a tool, service, pipeline, or piece of infrastructure.
+      - id: research
+        label: Research
+        blurb: Answer an open empirical or theoretical question.
+      - id: policy
+        label: Policy
+        blurb: Draft, analyse, or advocate for a rule, standard, or statute.
+      - id: dataset
+        label: Dataset
+        blurb: Assemble, clean, or publish a corpus from public sources.
+      - id: evaluation
+        label: Evaluation
+        blurb: Benchmark or independently test something that already exists.
+      - id: ontology
+        label: Ontology
+        blurb: Propose or refine a CAC class, property, or SHACL shape upstream.
+      - id: threat-intel
+        label: Threat intel
+        blurb: Document an emerging pattern or capability from public reporting.
+
+  effort:
+    label: Effort
+    multi: false
+    required: true
+    values:
+      - id: exploratory
+        label: Exploratory
+        blurb: Days. Scope it, decide whether it is real.
+      - id: small
+        label: Small
+        blurb: A week or two of focused work.
+      - id: medium
+        label: Medium
+        blurb: A month or two.
+      - id: large
+        label: Large
+        blurb: A quarter or more.
+      - id: program
+        label: Program
+        blurb: Ongoing, multi-person, no natural end date.
+
+  status:
+    label: Status
+    multi: false
+    required: true
+    values:
+      - id: open
+        label: Open
+        blurb: Nobody has picked this up.
+      - id: claimed
+        label: Claimed
+        blurb: Someone has said they intend to work on it.
+      - id: in_progress
+        label: In progress
+        blurb: Active work with something to show.
+      - id: needs_review
+        label: Needs review
+        blurb: Work exists and needs eyes on it.
+      - id: done
+        label: Done
+        blurb: Addressed. The outcome field says how.
+      - id: archived
+        label: Archived
+        blurb: No longer relevant, superseded, or out of scope.
+
+  skills:
+    label: Skills
+    multi: true
+    required: false
+    open: true
+    blurb: Free-form, but prefer these where they fit.
+    values:
+      - id: ml
+        label: Machine learning
+      - id: nlp
+        label: NLP
+      - id: computer-vision
+        label: Computer vision
+      - id: security
+        label: Security
+      - id: cryptography
+        label: Cryptography
+      - id: digital-forensics
+        label: Digital forensics
+      - id: data-engineering
+        label: Data engineering
+      - id: knowledge-graphs
+        label: Knowledge graphs
+      - id: semantic-web
+        label: Semantic web / RDF
+      - id: frontend
+        label: Frontend
+      - id: hci
+        label: HCI / design
+      - id: legal
+        label: Legal
+      - id: policy-analysis
+        label: Policy analysis
+      - id: criminology
+        label: Criminology
+      - id: statistics
+        label: Statistics
+      - id: trust-safety
+        label: Trust & safety
+      - id: clinical
+        label: Clinical / victim services
+      - id: writing
+        label: Writing
+
+# ---------------------------------------------------------------------------
+# Reference types. Every reference must be a publicly reachable URL.
+# See SCOPE.md for what may and may not be linked.
+# ---------------------------------------------------------------------------
+reference_types:
+  - id: paper
+    label: Paper / preprint
+  - id: report
+    label: Report
+  - id: standard
+    label: Standard / specification
+  - id: ontology
+    label: Ontology / vocabulary
+  - id: code
+    label: Code / repository
+  - id: dataset
+    label: Public dataset
+  - id: policy_document
+    label: Policy document / statute
+  - id: press_release
+    label: Press release
+  - id: court_record
+    label: Public court record
+  - id: news
+    label: News article
+  - id: post
+    label: Blog post / public post
+  - id: talk
+    label: Talk / recording

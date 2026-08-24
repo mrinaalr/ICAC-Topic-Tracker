@@ -1,0 +1,108 @@
+id: platform-affordance-misuse
+label: "Platform Affordance Misuse"
+aliases:
+  - "affordances for harm"
+  - "misuse surface"
+  - "capability misuse"
+
+domain: technology
+category: platform-design
+
+definition: >-
+  An affordance is what a platform's design makes possible — anonymity, ephemerality,
+  contact discovery, unmonitored communication, distribution infrastructure. Affordance
+  misuse is the offender-facing operationalisation of one of those neutral capabilities
+  toward exploitation. The concept separates three things that are usually collapsed:
+  what the platform enables, how an offender uses it, and what happens to the child.
+
+why_it_matters: >-
+  Enforcement records and online-harms research routinely name a platform without
+  explaining what about the medium made the offense possible. Naming the affordance
+  rather than the product turns a platform mention into something transferable: the
+  same capability appears on the next platform under a different brand, and a mitigation
+  designed against the capability survives the platform's decline.
+
+current_understanding: >-
+  Analysis of a large public ICAC enforcement corpus finds the same five capability
+  types recurring across platform generations and across two decades, implemented
+  differently each time and producing comparable offense mechanics. The CAC Ontology
+  models this directly as of v3.1.0, with an AffordanceMisuse class and named
+  affordance classes under the platforms module, plus properties linking an affordance
+  to the lifecycle transitions it enables. What remains contested is whether affordance
+  risk can be scored comparatively before a capability ships, and on what evidence base.
+
+open_questions:
+  - Can the marginal exploitation risk of a proposed capability be estimated before deployment, and what would count as evidence for such an estimate?
+  - Do affordance profiles predict harm profiles well enough to be actionable, or only well enough to be descriptive?
+  - How should composed affordances be scored when each is low-risk alone and high-risk together?
+
+maturity: active
+
+intervention_point: [platform_prevention, detection_monitoring]
+affordance_class: [contact_approach, production, possession_trade, coordination]
+lifecycle_stage: [initial_contact, conditioning, exploitation, maintenance]
+
+cac_alignment:
+  status: aligned
+  classes:
+    - https://cacontology.projectvic.org/platforms#AffordanceMisuse
+    - https://cacontology.projectvic.org/platforms#Anonymity
+    - https://cacontology.projectvic.org/platforms#Ephemerality
+    - https://cacontology.projectvic.org/platforms#ContactDiscovery
+    - https://cacontology.projectvic.org/platforms#UnmonitoredCommunication
+    - https://cacontology.projectvic.org/platforms#ChannelMigrationEvent
+  notes: >-
+    Modelled in the platforms module as of CAC v3.1.0.
+
+threads:
+  - id: pre-deployment-review-checklist
+    title: "Turn affordance review into a checklist a product team can actually run"
+    detail: >-
+      A pre-deployment review procedure exists on paper: decompose a proposed feature
+      into affordances, map each to capabilities already documented in the enforcement
+      record, estimate comparative misuse leverage per plausible offender goal, then
+      target mitigation at the highest-leverage link. It has been demonstrated once,
+      by hand, on a hypothetical product. Nothing automates or standardises it.
+    kind: build
+    effort: medium
+    status: open
+    skills: [trust-safety, hci, writing]
+    done_when:
+      - A written procedure a non-researcher product team can follow end to end
+      - At least two worked examples on real, shipped capabilities
+      - Output format that names the affordance, the leverage estimate, and the design-level mitigation
+  - id: affordance-scoring-evidence
+    title: "Establish what evidence supports comparative affordance scoring"
+    detail: >-
+      Comparative scoring is currently ordinal and argued from the record rather than
+      fitted. Determine what the public enforcement corpus can and cannot support, and
+      whether an ordinal ranking is defensible or should be replaced with something weaker.
+    kind: research
+    effort: medium
+    status: open
+    skills: [statistics, criminology]
+    done_when:
+      - A written account of what the corpus supports
+      - An explicit statement of what would falsify the scoring approach
+
+references:
+  - title: "Affordances for Harm: How Offenders Misuse Platform Capabilities to Exploit Children, and Where to Intervene"
+    url: https://doi.org/10.5281/zenodo.21347781
+    type: paper
+    publisher: "Zenodo"
+    date: "2026-07"
+    note: "Defines the affordance / misuse surface / harm vector decomposition used here."
+  - title: "CAC Ontology — platforms module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+  - title: "CaseLinker"
+    url: https://github.com/mrinaalr/CaseLinker
+    type: code
+    note: "Open-source pipeline that emits AffordanceMisuse annotations over public case records."
+
+related_topics: [exploitation-lifecycle-backbone, ai-generated-csam]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: ["@mrinaalr"]

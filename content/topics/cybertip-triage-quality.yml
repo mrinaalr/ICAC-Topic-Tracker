@@ -1,0 +1,89 @@
+id: cybertip-triage-quality
+label: "CyberTip Report Quality & Triage"
+aliases:
+  - "report quality"
+  - "tip triage"
+
+domain: policy-le
+category: reporting-intake
+
+definition: >-
+  The information content of a report arriving through the CyberTipline, and the
+  problem of ranking those reports so that the ones describing ongoing abuse are
+  worked first. Quality here means whether a report carries enough to act on, not
+  whether it was filed correctly.
+
+why_it_matters: >-
+  Reporting volume has grown far faster than investigative capacity, and reports arrive
+  with highly uneven detail depending on the reporting provider. Where a report does not
+  carry enough to distinguish a dead end from an active case, the cost lands on task
+  forces that must triage manually. This is the point in the pipeline where added
+  detection capacity converts into workload rather than into outcomes.
+
+current_understanding: >-
+  Published research and practitioner accounts consistently describe difficulty
+  prioritising reports, attributed to variance in what providers include rather than to
+  agency capability. Statutory reporting obligations specify that a report be made but
+  constrain its contents only loosely, so content varies by provider policy. Triage
+  approaches in the field range from manual review through rule-based scoring to
+  supervised models; where models are used, the accountability question is whether
+  their output can be traced back to something a person can inspect.
+
+open_questions:
+  - Which report fields actually predict a workable case, measured against outcomes rather than against analyst intuition?
+  - Can a minimum-content standard be specified without becoming a ceiling?
+  - How should an automated priority score be presented so it stays advisory rather than becoming policy by default?
+
+maturity: established
+
+intervention_point: [reporting_intake, investigation_attribution]
+lifecycle_stage: [exploitation, maintenance]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/us/ncmec#NCMECCybertipReport
+    - https://cacontology.projectvic.org/us/ncmec#CyberTipAnalysis
+    - https://cacontology.projectvic.org/us/ncmec#NCMECReportAnnotation
+  notes: >-
+    Report structure and analysis are modelled following the CyberTip API. What is not
+    modelled is report quality or triage priority as an assessable property — there is
+    no class for a triage score, its basis, or whether it was produced by a rule or a
+    model. That distinction matters for auditability and would be a useful extension.
+
+threads:
+  - id: triage-transparency-pattern
+    title: "Write a reference pattern for auditable triage scoring"
+    detail: >-
+      Where triage is automated, the score should remain accountable to something a
+      person can inspect. Document a pattern in which a deterministic rule layer
+      produces the score of record and any model output stays advisory and comparable
+      against it, including how to represent that split in a case graph.
+    kind: ontology
+    effort: medium
+    status: open
+    skills: [knowledge-graphs, semantic-web, trust-safety]
+    done_when:
+      - A written pattern with a worked example
+      - Proposed CAC classes or properties for triage score, basis, and producer
+      - An issue opened upstream on the CAC Ontology repository
+
+references:
+  - title: "Internet Crimes Against Children Task Force Program"
+    url: https://ojjdp.ojp.gov/programs/internet-crimes-against-children-task-force-program
+    type: policy_document
+    publisher: "OJJDP"
+  - title: "CyberTipline Data"
+    url: https://www.missingkids.org/cybertiplinedata
+    type: report
+    publisher: "NCMEC"
+  - title: "CAC Ontology — us-ncmec module"
+    url: https://github.com/Project-VIC-International/CAC-Ontology
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics: [hash-matching-coverage, analyst-secondary-trauma]
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

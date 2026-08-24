@@ -17,6 +17,8 @@ Checks performed
   6. Scope        — every reference URL passes the public-source policy
   7. Hygiene      — thread ids unique within a topic, dates well-ordered,
                     finished threads record an outcome
+  8. Future work  — content/future-work.yml maps to topics and taxonomy slots
+                    that exist, and its source URLs pass the public-source policy
 
 Usage
 -----
@@ -277,6 +279,47 @@ def validate_topic(
     return out
 
 
+def validate_future_work(tax: dict, all_ids: set[str]) -> list[Problem]:
+    """The horizon brief must point at topics and taxonomy slots that exist."""
+    path = CONTENT / "future-work.yml"
+    rel = path.relative_to(ROOT).as_posix()
+    out: list[Problem] = []
+    try:
+        data = load_yaml(path)
+    except Exception as exc:
+        return [Problem(rel, "error", f"could not parse: {exc}")]
+
+    for i, src in enumerate(data.get("sources") or []):
+        url = src.get("url")
+        if url:
+            check_url(url, f"{rel} sources[{i}]", out)
+        if src.get("type") and src["type"] not in tax["reference_types"]:
+            out.append(Problem(rel, "error", f"sources[{i}]: unknown type '{src['type']}'"))
+
+    for shift in data.get("structural_shifts") or []:
+        tid = shift.get("topic")
+        sid = shift.get("id") or "?"
+        if tid and tid not in all_ids:
+            out.append(Problem(rel, "error", f"structural_shifts '{sid}' maps to unknown topic '{tid}'"))
+
+    for group, items in (data.get("research_priorities") or {}).items():
+        for item in items or []:
+            iid = item.get("id") or "?"
+            where = f"{rel} research_priorities.{group}.{iid}"
+            tid = item.get("topic")
+            if tid and tid not in all_ids:
+                out.append(Problem(where, "error", f"maps to unknown topic '{tid}'"))
+            domain, category = item.get("domain"), item.get("category")
+            if domain and domain not in tax["categories"]:
+                out.append(Problem(where, "error", f"unknown domain '{domain}'"))
+            elif domain and category and category not in tax["categories"][domain]:
+                out.append(Problem(where, "error", f"unknown category '{category}' for domain '{domain}'"))
+            if not tid and not (domain and category):
+                out.append(Problem(where, "error", "needs a topic or a domain/category to file against"))
+
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("paths", nargs="*", type=Path, help="specific topic files (default: all)")
@@ -323,6 +366,8 @@ def main() -> int:
             continue
         problems.extend(validate_topic(
             f, data, validator, taxonomy, cac_classes, all_ids))
+
+    problems.extend(validate_future_work(taxonomy, all_ids))
 
     errors = [p for p in problems if p.level == "error"]
     warnings = [p for p in problems if p.level == "warn"]

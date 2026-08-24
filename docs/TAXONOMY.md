@@ -4,7 +4,7 @@
 
 ## Structure
 
-**Four domains**, chosen so that someone arriving with a question knows immediately which box to press:
+**Five domains**, chosen so that someone arriving with a question knows immediately which box to press:
 
 | Domain | Question it answers |
 |---|---|
@@ -12,6 +12,11 @@
 | Technology | What capabilities are involved, on both sides? |
 | Policy & Law Enforcement | What does the response system do, and what constrains it? |
 | Research & Data | What can the field not currently measure? |
+| Future Threats | How has the medium changed the offense, and what research is still missing? |
+
+Future Threats is the horizon view. It is not a sixth filing cabinet for current offense types: a concept that is already a vector, a capability, or a response-system problem stays in those domains. What belongs here is a structural shift — scale of access, AI as an aid, community formation — or a research priority that is not yet a settled topic.
+
+The Future Threats *tab* is a map onto the rest of the tracker. Each research priority from the public brief is filed against a topic where one exists, or against a taxonomy slot that is still empty. That is how the tab stays queryable rather than becoming a second essay.
 
 Each domain holds categories. Each category declares the CAC ontology modules that cover it, which is what makes the structure checkable rather than decorative.
 
@@ -44,6 +49,6 @@ The lifecycle stages correspond directly to CAC classes in the grooming module, 
 The taxonomy is meant to be stable. Someone who bookmarks a category should still find it there next year.
 
 - **Adding a category** — open an issue first. If it would hold one topic, that topic probably belongs in an existing category.
-- **Adding a domain** — a larger decision. Four top-level boxes is already close to the limit of what a landing page can present without becoming a menu to be explored, which is the failure mode this design exists to avoid.
+- **Adding a domain** — a larger decision. Five top-level boxes is already close to the limit of what a landing page can present without becoming a menu to be explored, which is the failure mode this design exists to avoid.
 - **Renaming** — changing a category `id` breaks every link to it. Change the `label` instead; ids are internal.
 - **Adding facet values** — lower stakes, but check first whether an existing value covers it.

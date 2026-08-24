@@ -213,6 +213,30 @@ h2 {
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 
+/* Five domain cards: three on the first row, Research & Data on the
+   bottom left, Future Threats under Policy & Law Enforcement on the
+   bottom right, middle of the bottom row left empty. */
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.domain-grid .domain-card[data-domain="future-threats"] { grid-column: 3; }
+@media (max-width: 1020px) {
+  .domain-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .domain-grid .domain-card[data-domain="future-threats"] { grid-column: 2; }
+}
+@media (max-width: 640px) {
+  .domain-grid { grid-template-columns: 1fr; }
+  .domain-grid .domain-card[data-domain="future-threats"] { grid-column: auto; }
+}
+
+.shift-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .shift-grid { grid-template-columns: 1fr; } }
+
+.badge.tracked { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
+.badge.scaffolded { color: var(--text-faint); }
+
 .card {
   display: block; background: var(--bg-raised);
   border: 1px solid var(--border); border-radius: var(--radius);

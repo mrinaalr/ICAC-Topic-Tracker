@@ -12,6 +12,7 @@
  *   #/t/:topic                  topic detail
  *   #/topics                    all topics, filterable
  *   #/threads                   every actionable thread across all topics
+ *   #/future-threats            horizon shifts and research gaps, filed onto topics
  *   #/ontology                  CAC module coverage
  *   #/about                     scope and sources
  */
@@ -138,9 +139,9 @@ function viewHome() {
     </div>
 
     <h2>Domains</h2>
-    <div class="grid grid-2">
+    <div class="grid domain-grid">
       ${DATA.taxonomy.domains.map((d) => `
-        <a class="card domain-card" href="#/d/${esc(d.id)}" style="--accent:${esc(d.accent)}">
+        <a class="card domain-card" data-domain="${esc(d.id)}" href="#/d/${esc(d.id)}" style="--accent:${esc(d.accent)}">
           <h3>${esc(d.label)}</h3>
           <p>${esc(d.blurb)}</p>
           <div class="card-foot">
@@ -315,6 +316,7 @@ function viewAllTopics() {
       ${sel('f-domain', 'Domain', DATA.taxonomy.domains.map((d) => `<option value="${esc(d.id)}">${esc(d.label)}</option>`).join(''))}
       ${sel('f-cac', 'Alignment', DATA.taxonomy.facets.cac_status.values.map((v) => `<option value="${esc(v.id)}">${esc(v.label)}</option>`).join(''))}
       ${sel('f-mat', 'Maturity', DATA.taxonomy.facets.maturity.values.map((v) => `<option value="${esc(v.id)}">${esc(v.label)}</option>`).join(''))}
+      ${sel('f-int', 'Intervention', DATA.taxonomy.facets.intervention_point.values.map((v) => `<option value="${esc(v.id)}">${esc(v.label)}</option>`).join(''))}
       <span class="spacer"></span>
       <span class="count" id="f-count"></span>
       <button class="btn-link" id="f-reset" type="button">Reset</button>
@@ -322,19 +324,20 @@ function viewAllTopics() {
     <div class="grid grid-2" id="topic-grid"></div>`;
 
   const apply = () => {
-    const dv = $('#f-domain').value, cv = $('#f-cac').value, mv = $('#f-mat').value;
+    const dv = $('#f-domain').value, cv = $('#f-cac').value, mv = $('#f-mat').value, iv = $('#f-int').value;
     const hits = DATA.topics.filter((t) =>
       (!dv || t.domain === dv) &&
       (!cv || t.cac_alignment.status === cv) &&
-      (!mv || t.maturity === mv));
+      (!mv || t.maturity === mv) &&
+      (!iv || (t.intervention_point || []).includes(iv)));
     $('#topic-grid').innerHTML = hits.length
       ? hits.map(topicCard).join('')
       : emptyState('Nothing matches', 'Try widening the filters.');
     $('#f-count').textContent = `${hits.length} of ${DATA.topics.length}`;
   };
-  ['f-domain', 'f-cac', 'f-mat'].forEach((id) => $('#' + id).addEventListener('change', apply));
+  ['f-domain', 'f-cac', 'f-mat', 'f-int'].forEach((id) => $('#' + id).addEventListener('change', apply));
   $('#f-reset').addEventListener('click', () => {
-    ['f-domain', 'f-cac', 'f-mat'].forEach((id) => { $('#' + id).value = ''; });
+    ['f-domain', 'f-cac', 'f-mat', 'f-int'].forEach((id) => { $('#' + id).value = ''; });
     apply();
   });
   apply();
@@ -447,6 +450,180 @@ async function viewOntology() {
           <p>${plural(m.class_count, 'class', 'classes')}</p>
         </div>`).join('')}
     </div>`;
+}
+
+function mapsHref(item) {
+  if (item.topic && topicOf(item.topic)) return `#/t/${item.topic}`;
+  if (item.domain && item.category) return `#/d/${item.domain}/${item.category}`;
+  if (item.domain) return `#/d/${item.domain}`;
+  return '#/future-threats';
+}
+
+function mapsMeta(item) {
+  const t = item.topic ? topicOf(item.topic) : null;
+  if (t) {
+    const d = domainOf(t.domain);
+    const c = categoryOf(t.domain, t.category);
+    return `${d?.label || t.domain} › ${c?.label || t.category}`;
+  }
+  const d = item.domain ? domainOf(item.domain) : null;
+  const c = item.domain && item.category ? categoryOf(item.domain, item.category) : null;
+  if (c) return `${d?.label || item.domain} › ${c.label}`;
+  if (d) return d.label;
+  return '';
+}
+
+function mapsCoverage(item) {
+  if (item.topic && topicOf(item.topic)) {
+    return `<span class="badge tracked">Tracked</span>`;
+  }
+  const c = item.domain && item.category ? categoryOf(item.domain, item.category) : null;
+  if (c) {
+    return c.topic_count
+      ? `<span class="badge">${plural(c.topic_count, 'topic')}</span>`
+      : `<span class="badge scaffolded">Scaffolded</span>`;
+  }
+  return '';
+}
+
+function priorityRow(item) {
+  const href = mapsHref(item);
+  const meta = mapsMeta(item);
+  return `
+    <a class="cat-row" href="${esc(href)}">
+      <span class="cat-name">${esc(item.label)}</span>
+      <span class="cat-blurb">${esc(meta)}</span>
+      <span class="cat-count">${mapsCoverage(item)}</span>
+    </a>`;
+}
+
+function viewFutureThreats() {
+  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'Future threats' }]);
+  const fw = DATA.futureWork;
+  const domain = domainOf('future-threats');
+  const topics = DATA.topics.filter((t) => t.domain === 'future-threats');
+  const threads = [];
+  for (const t of topics) {
+    for (const th of t.threads || []) {
+      if (ACTIONABLE.has(th.status)) threads.push({ thread: th, topic: t });
+    }
+  }
+
+  if (!fw) {
+    view.innerHTML = emptyState(
+      'Future-work brief not built',
+      'Run python3 tools/build.py to generate site/data/future-work.json, then reload.'
+    );
+    return;
+  }
+
+  const technical = fw.research_priorities?.technical || [];
+  const policy = fw.research_priorities?.policy || [];
+  const tracked = [...technical, ...policy].filter((i) => i.topic && topicOf(i.topic)).length;
+  const scaffolded = [...technical, ...policy].filter((i) => !(i.topic && topicOf(i.topic))).length;
+
+  view.innerHTML = `
+    <div class="page-head">
+      <h1>Future threats</h1>
+      <p>${esc(fw.framing)}</p>
+    </div>
+
+    <div class="notice">
+      <strong>A map, not a second catalogue.</strong> Each shift and research
+      priority is filed against a topic in this tracker where one exists, or
+      against a taxonomy slot that is still empty. Public sources only — see
+      <a href="#/about">scope</a>.
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><b>${(fw.structural_shifts || []).length}</b><span>Structural shifts</span></div>
+      <div class="stat"><b>${topics.length}</b><span>Topics in this domain</span></div>
+      <div class="stat"><b>${tracked}</b><span>Priorities with a topic</span></div>
+      <div class="stat"><b>${scaffolded}</b><span>Priorities still empty</span></div>
+    </div>
+
+    <h2>How the offense changed</h2>
+    <p class="muted small" style="margin-top:-6px;margin-bottom:14px">
+      Four avenues named in the
+      <a href="${esc(fw.sources?.[1]?.url || '#')}" target="_blank" rel="noopener noreferrer">Future Threats</a>
+      note. Each one is a topic, with ontology alignment and work someone can pick up.
+    </p>
+    <div class="grid shift-grid">
+      ${(fw.structural_shifts || []).map((s) => {
+        const t = topicOf(s.topic);
+        return `
+          <a class="card domain-card" href="${esc(mapsHref(s))}" style="--accent:${esc(domain?.accent || '#0e7490')}">
+            <h3>${esc(s.label)}</h3>
+            <p>${esc(s.summary)}</p>
+            <div class="card-foot">
+              <span>${t ? esc(t.label) : 'Unfiled'}</span>
+              ${t ? cacBadge(t.cac_alignment.status) : ''}
+            </div>
+          </a>`;
+      }).join('')}
+    </div>
+
+    <h2>Research priorities</h2>
+    <p class="muted small" style="margin-top:-6px;margin-bottom:14px">
+      From
+      <a href="${esc(fw.sources?.[0]?.url || '#')}" target="_blank" rel="noopener noreferrer">Future Work &amp; Research Gaps</a>.
+      Tracked means a topic exists. Scaffolded means the category is in the
+      taxonomy and empty — a filing location waiting for a topic.
+    </p>
+    <div class="filters">
+      <label for="p-group">Group</label>
+      <select id="p-group">
+        <option value="">All</option>
+        <option value="technical">Technical</option>
+        <option value="policy">Legal &amp; policy</option>
+      </select>
+      <label for="p-cov">Coverage</label>
+      <select id="p-cov">
+        <option value="">Any</option>
+        <option value="tracked">Has a topic</option>
+        <option value="scaffolded">Still empty</option>
+      </select>
+      <span class="spacer"></span>
+      <span class="count" id="p-count"></span>
+      <button class="btn-link" id="p-reset" type="button">Reset</button>
+    </div>
+    <div id="prio-list"></div>
+
+    <h2>Open questions</h2>
+    <ul class="qlist">${(fw.horizon_questions || []).map((q) => `<li>${esc(q)}</li>`).join('')}</ul>
+
+    <h2>${plural(topics.length, 'topic')} in this domain</h2>
+    ${topics.length
+      ? `<div class="grid grid-2">${topics.map(topicCard).join('')}</div>`
+      : emptyState('No topics here yet', 'The domain is scaffolded. Contributions welcome.')}
+
+    ${threads.length ? `<h2>Open work in this domain</h2>
+      ${threads.map(({ thread, topic }) => threadCard(thread, topic)).join('')}` : ''}
+
+    <h2>Sources</h2>
+    ${referenceList(fw.sources || [])}`;
+
+  const rows = [
+    ...technical.map((i) => ({ ...i, group: 'technical' })),
+    ...policy.map((i) => ({ ...i, group: 'policy' })),
+  ];
+  const isTracked = (i) => !!(i.topic && topicOf(i.topic));
+  const apply = () => {
+    const g = $('#p-group').value, c = $('#p-cov').value;
+    const hits = rows.filter((i) =>
+      (!g || i.group === g) &&
+      (!c || (c === 'tracked' ? isTracked(i) : !isTracked(i))));
+    $('#prio-list').innerHTML = hits.length
+      ? `<div class="cat-list">${hits.map(priorityRow).join('')}</div>`
+      : emptyState('Nothing matches', 'Try widening the filters.');
+    $('#p-count').textContent = `${hits.length} of ${rows.length}`;
+  };
+  ['p-group', 'p-cov'].forEach((id) => $('#' + id).addEventListener('change', apply));
+  $('#p-reset').addEventListener('click', () => {
+    ['p-group', 'p-cov'].forEach((id) => { $('#' + id).value = ''; });
+    apply();
+  });
+  apply();
 }
 
 function viewAbout() {
@@ -653,9 +830,10 @@ function route() {
   if (!parts.length) { markNav('#/'); return viewHome(); }
   switch (parts[0]) {
     case 'd':
-      markNav('#/');
+      markNav(parts[1] === 'future-threats' ? '#/future-threats' : '#/');
       return parts.length >= 3 ? viewCategory(parts[1], parts[2]) : viewDomain(parts[1]);
     case 't':
+      if (topicOf(parts[1])?.domain === 'future-threats') markNav('#/future-threats');
       return viewTopic(parts[1]);
     case 'topics':
       markNav('#/topics');
@@ -663,6 +841,9 @@ function route() {
     case 'threads':
       markNav('#/threads');
       return viewThreads();
+    case 'future-threats':
+      markNav('#/future-threats');
+      return viewFutureThreats();
     case 'ontology':
       markNav('#/ontology');
       return viewOntology();
@@ -678,13 +859,14 @@ function route() {
 
 async function boot() {
   try {
-    const [manifest, taxonomy, topics, index] = await Promise.all([
+    const [manifest, taxonomy, topics, index, futureWork] = await Promise.all([
       fetch('data/manifest.json').then((r) => r.json()),
       fetch('data/taxonomy.json').then((r) => r.json()),
       fetch('data/topics.json').then((r) => r.json()),
       fetch('data/index.json').then((r) => r.json()),
+      fetch('data/future-work.json').then((r) => r.ok ? r.json() : null),
     ]);
-    Object.assign(DATA, { manifest, taxonomy, topics, index });
+    Object.assign(DATA, { manifest, taxonomy, topics, index, futureWork });
   } catch (err) {
     view.innerHTML = emptyState(
       'Could not load the tracker data',

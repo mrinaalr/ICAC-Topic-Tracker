@@ -1,0 +1,109 @@
+id: offender-community-formation
+label: "Offender Community Formation"
+aliases:
+  - "offender community"
+  - "methodology sharing at scale"
+
+domain: future-threats
+category: offender-communities
+
+definition: >-
+  The internet as a place where people with a sexual interest in children can
+  find each other, reinforce that interest, and share methods, rather than
+  acting in isolation. The concept is the existence and scale of that community
+  formation, not the content of what is shared.
+
+why_it_matters: >-
+  Isolated offending is a different problem from offending that is taught,
+  normalised, and coordinated. Community formation changes volume, changes how
+  quickly a method spreads, and changes what disruption has to do: taking one
+  actor offline does not take the method offline. Treating every case as a
+  lone actor misses a structural shift that public notes on future threats
+  treat as among the most consequential.
+
+current_understanding: >-
+  Public reporting and threat assessments describe group-based and networked
+  offending, including commercially organised operations and, in a subset of
+  cases, ideologically framed networks. The CAC Ontology models extremist
+  enterprises, encrypted channel networks, dark-web services, and generic
+  coordination events. Those classes cover organised and extremist forms. They
+  do not cover the more general claim: that the medium itself made community
+  formation available to people who previously would not have found each other.
+  This topic stays at that structural claim. Detail that would function as a
+  pointer to where such communities operate is out of scope.
+
+open_questions:
+  - Can the difference between isolated and community-shaped offending be observed in public enforcement records without identifying groups?
+  - Which existing CAC classes should a case of community-shaped offending be filed under, and where do they run out?
+  - What disruption target — a person, a method, a coordination channel — is implied by treating community formation as the unit of analysis?
+
+maturity: emerging
+
+intervention_point: [detection_monitoring, investigation_attribution, prosecution_disruption]
+affordance_class: [coordination]
+lifecycle_stage: [initial_contact, maintenance]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/core#CoordinationEvent
+    - https://cacontology.projectvic.org/platforms#DarkWebService
+    - https://cacontology.projectvic.org/platforms#Anonymity
+    - https://cacontology.projectvic.org/platforms#UnmonitoredCommunication
+    - https://cacontology.projectvic.org/infrastructure#AnonymityInfrastructure
+    - https://cacontology.projectvic.org/extremist-enterprises#CrossPlatformCoordination
+  notes: >-
+    Coordination events, dark-web services, anonymity, unmonitored communication,
+    and cross-platform coordination in extremist enterprises are modelled. The
+    gap is general offender community formation — people finding each other and
+    reinforcing intent — as a phenomenon distinct from a named extremist
+    enterprise or a dark-web service. An extension would need a class for
+    community-as-capability that does not require the group to be an enterprise
+    or to be ideologically framed.
+
+threads:
+  - id: public-record-split
+    title: "Split public enforcement records into isolated vs community-shaped offending"
+    detail: >-
+      Using only published charging documents, press releases, and threat
+      assessments, code each cited pattern as isolated, commercially organised,
+      or community-shaped, and file it against an existing CAC class. Do not
+      name groups, forums, or services beyond what the cited public document
+      already names in passing, and do not reproduce identifiers.
+    kind: dataset
+    effort: medium
+    status: open
+    skills: [criminology, knowledge-graphs, writing]
+    done_when:
+      - A sourced coding frame with explicit inclusion and exclusion rules
+      - A count of public items that do not fit an existing class, with the proposed gap named
+
+references:
+  - title: "Future Threats"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS/Future%20Threats%202bca7cd825528065bdedf10b1e37d50b"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Treats community formation and method-sharing as a structural change, not a new offense type."
+  - title: "Future Work & Research Gaps"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS%202bba7cd8255280379bfee22ba5adbab3"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Lists identifying and disrupting organised networks as a technical priority."
+  - title: "Global Threat Assessment 2023"
+    url: "https://www.weprotect.org/global-threat-assessment-23/"
+    type: report
+    publisher: "WeProtect Global Alliance"
+    date: "2023"
+  - title: "CAC Ontology"
+    url: "https://github.com/Project-VIC-International/CAC-Ontology"
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics:
+  - platform-affordance-misuse
+  - unconstrained-victim-selection
+  - cryptocurrency-enabled-exploitation
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

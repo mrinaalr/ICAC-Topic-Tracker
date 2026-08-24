@@ -1,0 +1,115 @@
+id: unconstrained-victim-selection
+label: "Unconstrained Victim Selection"
+aliases:
+  - "scale of access"
+  - "public-data targeting"
+  - "geographic constraint collapse"
+
+domain: future-threats
+category: selection-at-scale
+
+definition: >-
+  The removal of physical and geographic limits on who an offender can reach, and
+  the corresponding ability to filter potential victims from public data before
+  first contact. What used to be bounded by who could be approached in person is
+  now bounded by who is visible on a network and how that visibility can be queried.
+
+why_it_matters: >-
+  Selection is the first stage of every contact offense. When it no longer requires
+  proximity, the pool of possible victims is the pool of children who can be found
+  and messaged, and the approach can be adapted to what a public profile already
+  discloses. Interventions designed around local opportunity — a known adult, a
+  school, a neighbourhood — do not automatically transfer to a selection process
+  that starts with search, suggestions, and a public feed.
+
+current_understanding: >-
+  Public threat assessments describe contact offending that begins with discovery
+  on mainstream platforms rather than with prior in-person access, and financially
+  motivated sextortion in particular is documented as a high-volume, low-duration
+  contact pattern that parallelises across many targets. The CAC Ontology models
+  victim targeting, contact-discovery affordances, and anonymous profile browsing
+  as separate classes; what it does not yet model is the structural claim that the
+  medium itself removed a constraint that used to bound the offense. That claim
+  originates in public research notes on future threats and is consistent with
+  the affordance analysis, but it has not been stated as a first-class class.
+
+open_questions:
+  - Which contact-discovery affordances account for the largest share of first contact, and can that be estimated from public reporting rather than from restricted data?
+  - Does filtering on public profile attributes change the victim pool in ways that existing targeting classes do not already capture?
+  - Where in the selection process is there a realistic intervention that does not depend on seeing the first message?
+
+maturity: emerging
+
+intervention_point: [platform_prevention, detection_monitoring]
+affordance_class: [contact_approach]
+lifecycle_stage: [initial_contact]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/grooming#VictimTargeting
+    - https://cacontology.projectvic.org/grooming#UnverifiedUserProfile
+    - https://cacontology.projectvic.org/grooming#PrivilegedVictimTargeting
+    - https://cacontology.projectvic.org/platforms#ContactDiscovery
+    - https://cacontology.projectvic.org/platforms#ProfileBrowsingAnonymous
+  notes: >-
+    Targeting, unverified profiles, and contact discovery are modelled. The missing
+    piece is the medium-level claim: that geographic and physical constraint on
+    selection has collapsed, and that public-data filtering is a distinct step
+    before first contact rather than a variant of targeting. An extension would
+    need a class or property for constraint-on-selection as a property of the
+    environment, not only of the offender's method.
+
+threads:
+  - id: affordance-first-contact
+    title: "Map public reporting of first-contact method onto contact-discovery affordances"
+    detail: >-
+      From published advisories, hotline commentary, and charging-document
+      patterns already in the public domain, record how first contact is described
+      and file each description against ContactDiscovery, anonymous profile
+      browsing, or another named affordance. No restricted data, no platform
+      internals, no victim or offender identification.
+    kind: dataset
+    effort: medium
+    status: open
+    skills: [criminology, writing, data-engineering]
+    done_when:
+      - A sourced table of public first-contact descriptions keyed to CAC affordance classes
+      - Explicit rows for descriptions that do not fit an existing class, with a proposed class name
+
+references:
+  - title: "Future Threats"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS/Future%20Threats%202bca7cd825528065bdedf10b1e37d50b"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Names geographic constraint collapse and public-data targeting as distinct avenues."
+  - title: "Future Work & Research Gaps"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS%202bba7cd8255280379bfee22ba5adbab3"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Lists targeting and recruitment as a technical research priority."
+  - title: "Global Threat Assessment 2023"
+    url: "https://www.weprotect.org/global-threat-assessment-23/"
+    type: report
+    publisher: "WeProtect Global Alliance"
+    date: "2023"
+  - title: "CyberTipline Data"
+    url: "https://www.missingkids.org/cybertiplinedata"
+    type: report
+    publisher: "NCMEC"
+  - title: "Affordances for Harm"
+    url: "https://doi.org/10.5281/zenodo.21347781"
+    type: paper
+    publisher: "Zenodo"
+    date: "2026"
+    note: "Contact-and-approach affordances as the mechanism underneath discovery."
+
+related_topics:
+  - platform-affordance-misuse
+  - exploitation-lifecycle-backbone
+  - financial-sextortion
+  - ai-enabled-grooming
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

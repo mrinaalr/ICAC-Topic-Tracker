@@ -1,0 +1,133 @@
+# Future work brief — compiled onto the Future Threats tab.
+#
+# The structural shifts and research priorities originate in End Child
+# Exploitation's public notes. Each item is filed against a topic in this
+# tracker where one exists, or against a taxonomy slot that is still empty.
+# That is the point: the tab is a map onto the rest of the tracker, not a
+# second copy of it.
+#
+#   https://end-child-exploitation.com/
+
+updated: "2026-08-24"
+
+framing: >-
+  As technology evolves and exploitation methods adapt, the offense is no longer
+  bounded the way it was in the pre-digital age. Abuse still happens in person;
+  what has changed is the resources an offender can reach for — who they can
+  select, how they can be aided, and whether they have to act alone. This tab
+  tracks those structural shifts and the research still needed, filed against
+  topics and ontology classes rather than as a free-standing essay.
+
+sources:
+  - title: "Future Work & Research Gaps"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS%202bba7cd8255280379bfee22ba5adbab3"
+    type: post
+    publisher: "End Child Exploitation"
+  - title: "Future Threats"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS/Future%20Threats%202bca7cd825528065bdedf10b1e37d50b"
+    type: post
+    publisher: "End Child Exploitation"
+  - title: "Global Threat Assessment 2023"
+    url: "https://www.weprotect.org/global-threat-assessment-23/"
+    type: report
+    publisher: "WeProtect Global Alliance"
+    date: "2023"
+
+# Four avenues named on the Future Threats note. Cards on the tab.
+structural_shifts:
+  - id: selection-without-geography
+    label: Selection without geography
+    summary: >-
+      Contact is no longer limited to children an offender can physically reach.
+      The selection process scales with the network, not with proximity.
+    topic: unconstrained-victim-selection
+  - id: public-data-targeting
+    label: Public-data targeting
+    summary: >-
+      Potential victims can be filtered from public profiles, contacted, and
+      the approach adapted to what the profile discloses.
+    topic: unconstrained-victim-selection
+  - id: ai-as-aid
+    label: AI as an aid across the offense
+    summary: >-
+      Generative models refine methods, produce grooming language, and impersonate
+      trusted figures. Distinct from AI-generated imagery, which is tracked separately.
+    topic: ai-enabled-grooming
+  - id: offender-community
+    label: Offender community formation
+    summary: >-
+      People with this intent can find each other, reinforce the intent, and
+      share methods at a scale that was not possible when each acted in isolation.
+    topic: offender-community-formation
+
+research_priorities:
+  technical:
+    - id: ai-csam-detection
+      label: Deepfake and AI-CSAM prevention and detection
+      topic: ai-generated-csam
+    - id: predictive-grooming
+      label: Predictive detection of grooming behaviour
+      topic: pre-harm-detection
+    - id: organised-networks
+      label: Identifying and disrupting organised criminal networks
+      domain: vectors
+      category: networks
+    - id: anonymity-privacy
+      label: Preventing anonymity misuse while preserving privacy
+      domain: technology
+      category: encryption-anonymity
+    - id: crypto-tracking
+      label: Tracking cryptocurrency-enabled exploitation
+      topic: cryptocurrency-enabled-exploitation
+    - id: targeting-recruitment
+      label: Understanding how children are targeted and recruited
+      topic: unconstrained-victim-selection
+    - id: exploitation-dynamics
+      label: Social and psychological research into exploitation dynamics
+      topic: exploitation-lifecycle-backbone
+    - id: platform-design
+      label: Platform design that reduces exploitation risk
+      topic: platform-affordance-misuse
+    - id: warning-signs
+      label: Preventive tools to detect warning signs before harm occurs
+      topic: pre-harm-detection
+
+  policy:
+    - id: ai-csam-statute
+      label: Regulatory frameworks for AI-generated CSAM
+      topic: ai-generated-csam
+    - id: encryption-safety
+      label: Balancing encryption and safety requirements
+      topic: on-device-csam-blocking
+      domain: technology
+      category: encryption-anonymity
+    - id: cross-border
+      label: Cross-border enforcement and international cooperation
+      domain: policy-le
+      category: jurisdiction
+    - id: platform-liability
+      label: Platform liability and accountability mechanisms
+      domain: policy-le
+      category: transparency
+    - id: privacy-preserving-detection
+      label: Privacy-preserving detection technologies
+      topic: on-device-csam-blocking
+    - id: prevention-policy
+      label: Prevention-focused policy approaches
+      domain: research
+      category: prevention
+    - id: age-assurance
+      label: Age verification and identity protection
+      domain: technology
+      category: age-assurance
+    - id: victim-support
+      label: Victim support and recovery frameworks
+      domain: policy-le
+      category: victim-services
+
+horizon_questions:
+  - How will AI and emerging technologies evolve exploitation methods?
+  - How can legal frameworks keep pace with rapid technological change?
+  - What tools can detect and prevent harm before it occurs?
+  - How can privacy, security, and child protection be balanced without collapsing one into another?
+  - What interventions are most effective at preventing exploitation, and against what baseline?

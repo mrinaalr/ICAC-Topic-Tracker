@@ -1,0 +1,130 @@
+id: ai-enabled-grooming
+label: "AI-Enabled Grooming & Impersonation"
+aliases:
+  - "LLM-assisted grooming"
+  - "generative impersonation"
+  - "AI chatbot grooming"
+
+domain: future-threats
+category: ai-enabled-offending
+
+definition: >-
+  The use of generative models as an aid to contact offending rather than as a
+  producer of abuse imagery. Covers generated grooming language, fabricated or
+  celebrity-like personas that can sustain a conversation, and the use of models
+  to refine an approach against a specific target. Distinct from AI-generated
+  CSAM, which is a production problem.
+
+why_it_matters: >-
+  Imagery synthesis is already tracked, charged, and partially modelled in the
+  ontology. Text-and-persona synthesis is not. If a model can produce the
+  language of grooming, impersonate a peer or an idol, and adapt to the target,
+  then the scarce resource in the offense — time, social skill, a convincing
+  identity — is no longer scarce. Detection built for files does not see this;
+  detection built for known grooming scripts will see only the scripts it has.
+
+current_understanding: >-
+  Public notes on future threats treat AI as an aid across every avenue of the
+  offense, not only as an image generator. The CAC Ontology has a rich set of
+  impersonation and fabricated-persona classes in the grooming and sextortion
+  modules, and a generative-synthesis affordance on the platforms side that is
+  scoped to media. There is no class for a generative-text or conversational
+  agent used to groom. Threat assessments record rapid growth in AI-generated
+  imagery; comparable public measurement for AI-assisted contact is thinner,
+  which is itself a gap.
+
+open_questions:
+  - What share of contact offending, if any, already involves generated language or a conversational agent, and what public signal would show it?
+  - Do existing impersonation classes cover a model-operated persona, or does the operator being a model change the class?
+  - What would a detection or disruption approach look like that does not require reading the content of private messages?
+
+maturity: emerging
+
+intervention_point: [platform_prevention, detection_monitoring]
+affordance_class: [contact_approach]
+lifecycle_stage: [initial_contact, conditioning]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/grooming#FabricatedPersona
+    - https://cacontology.projectvic.org/grooming#TeenageImpersonationGrooming
+    - https://cacontology.projectvic.org/grooming#PeerPersonaGrooming
+    - https://cacontology.projectvic.org/grooming#GroomingMessage
+    - https://cacontology.projectvic.org/grooming#GroomingPattern
+    - https://cacontology.projectvic.org/grooming#MultipleAccountGrooming
+    - https://cacontology.projectvic.org/sextortion#IdentityImpersonation
+    - https://cacontology.projectvic.org/platforms#GenerativeSynthesis
+  notes: >-
+    Impersonation, fabricated personas, grooming messages, and generative media
+    synthesis are modelled. What is missing is generative text and conversational
+    agents as a grooming mechanism — a model producing the language or running
+    the persona, rather than a human using a false identity. GenerativeSynthesis
+    is an affordance for synthetic media, not for language. An extension would
+    need a class for model-assisted or model-operated contact.
+
+threads:
+  - id: class-proposal
+    title: "Draft a CAC class for model-assisted contact offending"
+    detail: >-
+      Compare FabricatedPersona, IdentityImpersonation, GroomingMessage, and
+      GenerativeSynthesis against the claim that a model can produce grooming
+      language or operate a persona. Write the smallest class or property that
+      would make the distinction checkable, with examples drawn only from public
+      reporting, and a note on what would be out of scope.
+    kind: ontology
+    effort: small
+    status: open
+    skills: [semantic-web, knowledge-graphs, writing]
+    done_when:
+      - A proposed class or property with a label, definition, and parent
+      - Explicit contrast with the four existing classes named above
+      - A short list of public sources the definition is accountable to
+  - id: public-signal
+    title: "Catalogue public reporting of AI used in contact offending, not imagery"
+    detail: >-
+      Separate AI-as-image-generator from AI-as-aid-to-contact in published
+      reporting, prosecutions, and platform transparency notes. The output is a
+      sourced inventory, not an incident list, and must not identify victims or
+      offenders.
+    kind: threat-intel
+    effort: medium
+    status: open
+    skills: [writing, criminology, policy-analysis]
+    done_when:
+      - A table of public items, each classified as imagery, contact-aid, or both
+      - "A stated residual: what this inventory cannot see"
+
+references:
+  - title: "Future Threats"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS/Future%20Threats%202bca7cd825528065bdedf10b1e37d50b"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Names LLM-generated grooming language and impersonation of role models as distinct from imagery synthesis."
+  - title: "Future Work & Research Gaps"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS%202bba7cd8255280379bfee22ba5adbab3"
+    type: post
+    publisher: "End Child Exploitation"
+  - title: "How AI is being abused to create child sexual abuse imagery"
+    url: "https://www.iwf.org.uk/about-us/why-we-exist/our-research/how-ai-is-being-abused-to-create-child-sexual-abuse-imagery/"
+    type: report
+    publisher: "Internet Watch Foundation"
+    note: "Public measurement of AI-CSAM; the contrast class for this topic."
+  - title: "Global Threat Assessment 2023"
+    url: "https://www.weprotect.org/global-threat-assessment-23/"
+    type: report
+    publisher: "WeProtect Global Alliance"
+    date: "2023"
+  - title: "CAC Ontology"
+    url: "https://github.com/Project-VIC-International/CAC-Ontology"
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics:
+  - ai-generated-csam
+  - platform-affordance-misuse
+  - unconstrained-victim-selection
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

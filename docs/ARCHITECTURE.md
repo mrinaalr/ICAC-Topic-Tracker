@@ -5,8 +5,8 @@
 ```
 content/topics/*.yml   ──┐
 content/taxonomy.yml   ──┼──▶  tools/build.py  ──▶  site/data/*.json  ──▶  site/
-content/cac-index.json ──┘          │                                       (GitHub Pages)
-                                    └── tools/validate.py
+content/cac-index.json ──┤          │                                       (GitHub Pages)
+content/future-work.yml─┘          └── tools/validate.py
 ```
 
 Content is YAML in git. A build step compiles it to JSON. A static site reads the JSON. There is no server, no database, and no runtime dependency.
@@ -25,7 +25,7 @@ Content is YAML in git. A build step compiles it to JSON. A static site reads th
 
 1. **`validate.py`** checks each topic against the JSON Schema, then against `taxonomy.yml` (domain, category, facet values), then against `cac-index.json` (every declared class IRI must exist), then referentially (`related_topics` resolve), then against the scope policy (URLs are public HTTPS), then hygiene (unique thread ids, ordered dates, outcomes on finished threads).
 
-2. **`build.py`** loads the same three inputs and writes six files:
+2. **`build.py`** loads the same inputs plus `content/future-work.yml` and writes seven files:
 
    | File | Contents | Loaded |
    |---|---|---|
@@ -33,8 +33,9 @@ Content is YAML in git. A build step compiles it to JSON. A static site reads th
    | `taxonomy.json` | Structure with live topic and thread counts attached | On boot |
    | `topics.json` | Every topic, fully denormalised | On boot |
    | `index.json` | Compact search index | On boot |
-   | `cac.json` | Ontology modules and classes | Lazily, only for the ontology view |
-   | `gaps.json` | Topics with incomplete CAC coverage | On demand |
+    | `cac.json` | Ontology modules and classes | Lazily, only for the ontology view |
+    | `future-work.json` | Horizon brief: structural shifts and research priorities filed onto topics | On boot |
+    | `gaps.json` | Topics with incomplete CAC coverage | On demand |
 
    `cac.json` is the large one, so it is fetched only when someone opens the ontology page rather than on every visit.
 

@@ -11,6 +11,7 @@ Outputs
     site/data/taxonomy.json     domains, categories, facets, reference types
     site/data/topics.json       every topic, fully denormalised for the client
     site/data/index.json        lightweight search index (id, label, aliases, text)
+    site/data/future-work.json  horizon brief filed onto topics and taxonomy slots
     site/data/cac.json          CAC module summaries + per-module class lists
     site/data/gaps.json         topics where CAC coverage is missing or partial
 
@@ -219,6 +220,10 @@ def build() -> int:
                 " ".join(t.get("aliases", [])),
                 t["definition"],
                 t.get("why_it_matters", ""),
+                t.get("current_understanding", ""),
+                " ".join(t.get("open_questions", []) or []),
+                t.get("domain_label", ""),
+                t.get("category_label", ""),
                 " ".join(x["title"] for x in t.get("threads", []) or []),
                 " ".join(c["label"] for c in t["cac_alignment"]["resolved"]),
             ])).lower(),
@@ -234,6 +239,7 @@ def build() -> int:
         "index.json": write_json(OUT / "index.json", index),
         "cac.json": write_json(OUT / "cac.json", cac_out),
         "gaps.json": write_json(OUT / "gaps.json", gaps),
+        "future-work.json": write_json(OUT / "future-work.json", load_yaml(CONTENT / "future-work.yml")),
     }
 
     digest = hashlib.sha256()

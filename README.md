@@ -1,6 +1,6 @@
 # ICAC Topic Tracker
 
-**Created to track issues, topics, and challenges in the issue space for engineers, researchers, and other professionals to cleanly see the issues and design interdictions.**
+**Created to track problems, topics, and challenges in the ICAC issue space, so engineers, researchers, and other professionals can cleanly see the issues and design interdictions.**
 
 Internet Crimes Against Children is a large domain of discourse spread across enforcement, platform trust and safety, law, clinical practice, and research. The problems in it are well known to the people working on any one part and largely invisible to everyone else. This is a browsable, citable map of those problems — organised so that someone with the right skills can find a piece of work that matches them and start on it.
 
@@ -22,7 +22,7 @@ Each entry is a **topic** — a concept the field actually discusses, not a head
 | **Threads** | Concrete work someone can pick up, each with criteria for what counts as done. |
 | **References** | Public sources, every one openable without credentials. |
 
-Topics are filed under four domains — **Exploitation Vectors**, **Technology**, **Policy & Law Enforcement**, and **Research & Data** — and drilled into by category. The navigation is designed so you do not have to explore: if you already know AI is your area, you press Technology, then Generative AI, and you are looking at the work.
+Topics are filed under five domains — **Exploitation Vectors**, **Technology**, **Policy & Law Enforcement**, **Research & Data**, and **Future Threats** — and drilled into by category. The navigation is designed so you do not have to explore: if you already know AI is your area, you press Technology, then Generative AI, and you are looking at the work. Future Threats is the horizon view: structural shifts in how the offense works, filed back onto topics and ontology classes.
 
 ## Grounded in the CAC Ontology
 
@@ -75,8 +75,8 @@ Open a pull request. CI runs the same validation and blocks the merge if anythin
 ```
 content/topics/*.yml   ──┐
 content/taxonomy.yml   ──┼──▶  tools/build.py  ──▶  site/data/*.json  ──▶  site/  (GitHub Pages)
-content/cac-index.json ──┘          │
-                                    └── tools/validate.py  (schema + taxonomy + ontology + scope)
+content/cac-index.json ──┤          │
+content/future-work.yml─┘          └── tools/validate.py  (schema + taxonomy + ontology + scope)
 ```
 
 Content is plain YAML under version control, so every change to the map of the field is a reviewable diff with an author and a date. The site is static HTML, CSS, and vanilla JavaScript with no framework, no build toolchain, and no runtime dependencies — it is deployed by copying files.
@@ -85,6 +85,7 @@ Content is plain YAML under version control, so every change to the map of the f
 |---|---|
 | `content/topics/` | One YAML file per topic. The actual content. |
 | `content/taxonomy.yml` | Domains, categories, facets. Single source of truth for structure. |
+| `content/future-work.yml` | Horizon brief for the Future Threats tab. Filed onto topics and empty taxonomy slots. |
 | `content/cac-index.json` | Vendored CAC ontology index. Generated; do not hand-edit. |
 | `schema/topic.schema.json` | JSON Schema for a topic file. |
 | `tools/validate.py` | Schema, taxonomy, ontology, and scope checks. Runs in CI. |

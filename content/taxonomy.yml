@@ -176,6 +176,32 @@ domains:
         blurb: Benchmarks, ground truth, and honest evaluation of tools that claim to help.
         cac_modules: [detection, synthesis]
 
+  - id: future-threats
+    label: Future Threats
+    blurb: How the medium has changed the offense — scale of access, AI as an aid, and offender community formation — and the research still needed.
+    accent: "#0e7490"
+    categories:
+      - id: selection-at-scale
+        label: Unconstrained Selection
+        blurb: Geographic and physical limits on who can be reached no longer hold; targeting now scales with public data.
+        cac_modules: [grooming, platforms, stranger-abduction]
+      - id: ai-enabled-offending
+        label: AI-Enabled Offending
+        blurb: Generative models used as an aid across the offense — scripts, impersonation, and methodology — distinct from synthetic imagery.
+        cac_modules: [grooming, ai-csam, platforms, sextortion]
+      - id: offender-communities
+        label: Offender Community Formation
+        blurb: The internet as a place where people with this intent find each other, share methods, and reinforce the intent.
+        cac_modules: [platforms, platform-infrastructure, extremist-enterprises]
+      - id: crypto-exploitation
+        label: Cryptocurrency-Enabled Exploitation
+        blurb: Virtual assets used to pay for abuse, move proceeds, and keep coercion alive after an account is taken down.
+        cac_modules: [platforms, platform-infrastructure, asset-forfeiture, sextortion]
+      - id: pre-harm-detection
+        label: Pre-Harm Detection
+        blurb: Finding the warning signs of grooming or targeting before imagery exists or a meeting is arranged.
+        cac_modules: [grooming, prevention, detection]
+
 # ---------------------------------------------------------------------------
 # Cross-cutting facets. Every topic may carry these regardless of category.
 # They are what make the tracker queryable rather than merely browsable.

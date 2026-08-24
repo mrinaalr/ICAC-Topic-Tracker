@@ -1,0 +1,118 @@
+id: pre-harm-detection
+label: "Pre-Harm Detection"
+aliases:
+  - "predictive grooming detection"
+  - "warning-sign detection"
+  - "before-harm intervention"
+
+domain: future-threats
+category: pre-harm-detection
+
+definition: >-
+  Detection that acts before abuse imagery exists or an in-person meeting is
+  arranged — on grooming language, targeting behaviour, or other warning signs —
+  rather than on known or newly produced material. Distinct from hash matching,
+  which identifies files already on a list, and from novel-material classifiers,
+  which still fire on imagery.
+
+why_it_matters: >-
+  Most deployed detection answers a file question. Contact offending, financially
+  motivated sextortion, and AI-assisted grooming do not have to produce a file
+  before harm is done. If the field can only see the offense after material
+  exists, it is structurally late for every trajectory that never produces one,
+  and late even for those that do. Pre-harm detection is the proposed way to
+  move intervention earlier; it is also the proposal that most directly collides
+  with private communication and with error costs that land on children.
+
+current_understanding: >-
+  Research notes list predictive grooming detection and warning-sign tools as
+  technical priorities. The CAC Ontology models grooming behaviour and grooming
+  patterns, primary and secondary prevention programmes, and automated content
+  detection. Prevention classes are programme-shaped (curriculum, metrics,
+  advocates). Detection classes are content-shaped (hashing, classifiers, tools).
+  There is no class for a behavioural detector that fires on a trajectory before
+  material exists. Hash-matching coverage limits already record that known-file
+  detection cannot see this; on-device scanning is the contested proposal for
+  seeing inside encrypted channels, and it is still a file proposal.
+
+open_questions:
+  - What public, non-illegal proxy tasks would let a grooming-trajectory detector be evaluated without reading children's messages or possessing material?
+  - At what false-positive rate does a pre-harm detector cause more harm than it prevents, and who bears that cost?
+  - Is the right intervention at this point a detector at all, or a design change that removes the contact-discovery affordance the trajectory starts from?
+
+maturity: emerging
+
+intervention_point: [platform_prevention, detection_monitoring]
+affordance_class: [contact_approach]
+lifecycle_stage: [initial_contact, conditioning]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/grooming#GroomingBehavior
+    - https://cacontology.projectvic.org/grooming#GroomingPattern
+    - https://cacontology.projectvic.org/grooming#GroomingMessage
+    - https://cacontology.projectvic.org/prevention#PrimaryPrevention
+    - https://cacontology.projectvic.org/prevention#SecondaryPrevention
+    - https://cacontology.projectvic.org/prevention#BehavioralPrevention
+    - https://cacontology.projectvic.org/core#DetectionEvent
+    - https://cacontology.projectvic.org/detection#AutomatedDetectionAction
+    - https://cacontology.projectvic.org/detection#MachineLearningDetectionTool
+  notes: >-
+    Grooming behaviour and patterns, prevention programmes, and automated
+    content detection are modelled. The gap is behavioural detection on a
+    trajectory before material exists: a detector whose input is contact
+    behaviour rather than a file, and whose output is a warning rather than a
+    hash hit. Prevention classes describe programmes, not classifiers.
+    Detection classes describe content tools. An extension would need a class
+    for pre-harm or trajectory detection as an event type.
+
+threads:
+  - id: proxy-eval
+    title: "Specify a public proxy evaluation for pre-harm grooming detection"
+    detail: >-
+      Write an evaluation protocol that does not require children's private
+      messages or illegal material. Name the proxy tasks, the argument for
+      why they transfer, the error metrics that matter (especially
+      false-positive cost), and what the protocol cannot claim. Contrast with
+      file-based detection evaluation.
+    kind: evaluation
+    effort: medium
+    status: open
+    skills: [ml, nlp, evaluation, hci]
+    done_when:
+      - A written protocol with named proxy tasks and a transfer argument
+      - Explicit out-of-scope claims, including anything that would require restricted data
+      - A comparison table against hash-matching and novel-material evaluation
+
+references:
+  - title: "Future Work & Research Gaps"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS%202bba7cd8255280379bfee22ba5adbab3"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Lists predictive grooming detection and warning-sign tools as technical priorities, and pre-harm tools as an open question."
+  - title: "Future Threats"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS/Future%20Threats%202bca7cd825528065bdedf10b1e37d50b"
+    type: post
+    publisher: "End Child Exploitation"
+  - title: "CAC Ontology"
+    url: "https://github.com/Project-VIC-International/CAC-Ontology"
+    type: ontology
+    publisher: "Project VIC International"
+  - title: "Affordances for Harm"
+    url: "https://doi.org/10.5281/zenodo.21347781"
+    type: paper
+    publisher: "Zenodo"
+    date: "2026"
+    note: "Argues that design interventions at contact-and-approach may outperform detection that waits for material."
+
+related_topics:
+  - hash-matching-coverage
+  - on-device-csam-blocking
+  - ai-enabled-grooming
+  - exploitation-lifecycle-backbone
+  - cybertip-triage-quality
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

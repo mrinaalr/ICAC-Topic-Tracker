@@ -54,13 +54,23 @@ function cacBadge(status) {
   return `<span class="badge dot ${esc(status)}">${esc(facetLabel('cac_status', status))}</span>`;
 }
 
+/** Break the long agent category title so it sits on two lines like the others. */
+function stackedLabel(label) {
+  return esc(label).replace(' and Orchestrated ', ' and<br>Orchestrated ');
+}
+
 function setCrumbs(parts) {
+  if (!parts.length) {
+    crumbs.hidden = true;
+    crumbs.innerHTML = '';
+    return;
+  }
+  crumbs.hidden = false;
   crumbs.innerHTML = parts
     .map((p, i) => {
-      const last = i === parts.length - 1;
-      const node = last || !p.href
-        ? `<span class="muted">${esc(p.label)}</span>`
-        : `<a href="${esc(p.href)}">${esc(p.label)}</a>`;
+      const node = p.href
+        ? `<a href="${esc(p.href)}">${esc(p.label)}</a>`
+        : `<span class="muted">${esc(p.label)}</span>`;
       return i === 0 ? node : `<span>/</span>${node}`;
     })
     .join('');
@@ -76,7 +86,7 @@ function topicCard(t) {
   const n = t.thread_counts.actionable;
   return `
     <a class="card" href="#/t/${esc(t.id)}">
-      <h3>${esc(t.label)}</h3>
+      <h3>${stackedLabel(t.label)}</h3>
       <p>${esc(t.definition.slice(0, 165))}${t.definition.length > 165 ? '…' : ''}</p>
       <div class="badges">
         ${cacBadge(t.cac_alignment.status)}
@@ -119,7 +129,7 @@ function referenceList(refs) {
 /* ---------- views ---------- */
 
 function viewHome() {
-  setCrumbs([{ label: 'Domains' }]);
+  setCrumbs([]);
   const m = DATA.manifest.counts;
   view.innerHTML = `
     <div class="page-head">
@@ -138,7 +148,6 @@ function viewHome() {
       <div class="stat"><b>${m.cac_classes}</b><span>CAC classes indexed</span></div>
     </div>
 
-    <h2>Domains</h2>
     <div class="grid domain-grid">
       ${DATA.taxonomy.domains.map((d) => `
         <a class="card domain-card" data-domain="${esc(d.id)}" href="#/d/${esc(d.id)}" style="--accent:${esc(d.accent)}">
@@ -156,7 +165,7 @@ function viewHome() {
 function viewDomain(domainId) {
   const d = domainOf(domainId);
   if (!d) return notFound('domain', domainId);
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: d.label }]);
+  setCrumbs([]);
 
   view.innerHTML = `
     <div class="page-head">
@@ -167,7 +176,7 @@ function viewDomain(domainId) {
     <div class="cat-list">
       ${d.categories.map((c) => `
         <a class="cat-row" href="#/d/${esc(d.id)}/${esc(c.id)}">
-          <span class="cat-name">${esc(c.label)}</span>
+          <span class="cat-name">${stackedLabel(c.label)}</span>
           <span class="cat-blurb">${esc(c.blurb)}</span>
           <span class="cat-count">${c.topic_count} · ${c.actionable_threads} open</span>
         </a>`).join('')}
@@ -179,9 +188,7 @@ function viewCategory(domainId, catId) {
   const c = categoryOf(domainId, catId);
   if (!d || !c) return notFound('category', `${domainId}/${catId}`);
   setCrumbs([
-    { label: 'Domains', href: '#/' },
     { label: d.label, href: `#/d/${d.id}` },
-    { label: c.label },
   ]);
 
   const topics = DATA.topics.filter((t) => t.domain === domainId && t.category === catId);
@@ -191,7 +198,7 @@ function viewCategory(domainId, catId) {
 
   view.innerHTML = `
     <div class="page-head">
-      <h1>${esc(c.label)}</h1>
+      <h1>${stackedLabel(c.label)}</h1>
       <p>${esc(c.blurb)}</p>
     </div>
     ${modules.length ? `<p class="small muted">Ontology coverage: ${modules
@@ -208,10 +215,8 @@ function viewTopic(id) {
   const d = domainOf(t.domain);
   const c = categoryOf(t.domain, t.category);
   setCrumbs([
-    { label: 'Domains', href: '#/' },
     { label: d?.label || t.domain, href: `#/d/${t.domain}` },
     { label: c?.label || t.category, href: `#/d/${t.domain}/${t.category}` },
-    { label: t.label },
   ]);
 
   const threads = t.threads || [];
@@ -231,7 +236,7 @@ function viewTopic(id) {
 
   view.innerHTML = `
     <div class="page-head">
-      <h1>${esc(t.label)}</h1>
+      <h1>${stackedLabel(t.label)}</h1>
       ${t.aliases?.length ? `<p class="small muted">Also called: ${t.aliases.map(esc).join(' · ')}</p>` : ''}
       <div class="badges">
         ${cacBadge(al.status)}
@@ -302,7 +307,7 @@ function viewTopic(id) {
 }
 
 function viewAllTopics() {
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'All topics' }]);
+  setCrumbs([]);
   const sel = (id, label, opts) => `
     <label for="${id}">${label}</label>
     <select id="${id}"><option value="">Any</option>${opts}</select>`;
@@ -344,7 +349,7 @@ function viewAllTopics() {
 }
 
 function viewThreads() {
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'Open work' }]);
+  setCrumbs([]);
   const rows = [];
   for (const t of DATA.topics) {
     for (const th of t.threads || []) {
@@ -395,7 +400,7 @@ function viewThreads() {
 }
 
 async function viewOntology() {
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'Ontology' }]);
+  setCrumbs([]);
   view.innerHTML = '<p class="muted">Loading ontology index…</p>';
   await loadCac();
 
@@ -498,7 +503,7 @@ function priorityRow(item) {
 }
 
 function viewFutureThreats() {
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'Future threats' }]);
+  setCrumbs([]);
   const fw = DATA.futureWork;
   const domain = domainOf('future-threats');
   const topics = DATA.topics.filter((t) => t.domain === 'future-threats');
@@ -544,16 +549,15 @@ function viewFutureThreats() {
 
     <h2>How the offense changed</h2>
     <p class="muted small" style="margin-top:-6px;margin-bottom:14px">
-      Four avenues named in the
-      <a href="${esc(fw.sources?.[1]?.url || '#')}" target="_blank" rel="noopener noreferrer">Future Threats</a>
-      note. Each one is a topic, with ontology alignment and work someone can pick up.
+      Structural shifts in how the offense works. Each one is filed to a
+      topic, with ontology alignment and work someone can pick up.
     </p>
     <div class="grid shift-grid">
       ${(fw.structural_shifts || []).map((s) => {
         const t = topicOf(s.topic);
         return `
           <a class="card domain-card" href="${esc(mapsHref(s))}" style="--accent:${esc(domain?.accent || '#0e7490')}">
-            <h3>${esc(s.label)}</h3>
+            <h3>${stackedLabel(s.label)}</h3>
             <p>${esc(s.summary)}</p>
             <div class="card-foot">
               <span>${t ? esc(t.label) : 'Unfiled'}</span>
@@ -627,7 +631,7 @@ function viewFutureThreats() {
 }
 
 function viewAbout() {
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'About' }]);
+  setCrumbs([]);
   const m = DATA.manifest;
   view.innerHTML = `
     <div class="page-head">
@@ -718,7 +722,7 @@ function viewAbout() {
 }
 
 function notFound(what, id) {
-  setCrumbs([{ label: 'Domains', href: '#/' }, { label: 'Not found' }]);
+  setCrumbs([]);
   view.innerHTML = emptyState(
     `No such ${what}`,
     `Nothing here is called “${id}”. It may have been renamed or removed.`

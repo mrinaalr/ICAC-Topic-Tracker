@@ -178,7 +178,7 @@ domains:
 
   - id: future-threats
     label: Future Threats
-    blurb: How the medium has changed the offense — scale of access, AI as an aid, and offender community formation — and the research still needed.
+    blurb: How the medium has changed the offense — scale of access, AI-enhanced offending, agent-facilitated and orchestrated offending, and offender community formation — and the research still needed.
     accent: "#0e7490"
     categories:
       - id: selection-at-scale
@@ -186,9 +186,13 @@ domains:
         blurb: Geographic and physical limits on who can be reached no longer hold; targeting now scales with public data.
         cac_modules: [grooming, platforms, stranger-abduction]
       - id: ai-enabled-offending
-        label: AI-Enabled Offending
-        blurb: Generative models used as an aid across the offense — scripts, impersonation, and methodology — distinct from synthetic imagery.
+        label: AI-Enhanced Offending
+        blurb: The offender still plans. A model carries out a directed request — write this script, impersonate this person, produce this image.
         cac_modules: [grooming, ai-csam, platforms, sextortion]
+      - id: agent-facilitated-offending
+        label: Agent-Facilitated and Orchestrated Offending
+        blurb: Systems that plan, chain actions, and execute with little turn-by-turn direction. Distinct from, and a step above, AI-enhanced offending.
+        cac_modules: [grooming, ai-csam, platforms, platform-infrastructure]
       - id: offender-communities
         label: Offender Community Formation
         blurb: The internet as a place where people with this intent find each other, share methods, and reinforce the intent.

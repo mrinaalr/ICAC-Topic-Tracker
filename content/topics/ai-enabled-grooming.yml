@@ -9,33 +9,44 @@ domain: future-threats
 category: ai-enabled-offending
 
 definition: >-
-  The use of generative models as an aid to contact offending rather than as a
-  producer of abuse imagery. Covers generated grooming language, fabricated or
-  celebrity-like personas that can sustain a conversation, and the use of models
-  to refine an approach against a specific target. Distinct from AI-generated
-  CSAM, which is a production problem.
+  The use of generative models as a tool the offender still directs, rather than
+  as a system that plans and acts on its own. Covers generated grooming language,
+  fabricated or celebrity-like personas that can sustain a conversation, and the
+  use of models to refine an approach against a specific target — make this
+  image, write this script, impersonate this person. The human holds the vision
+  and the next step. Distinct from AI-generated CSAM as a production problem,
+  and distinct from agent-facilitated offending, where the system plans, chains
+  actions, and executes. An agent uses AI; using AI does not make the work an
+  agent.
 
 why_it_matters: >-
   Imagery synthesis is already tracked, charged, and partially modelled in the
   ontology. Text-and-persona synthesis is not. If a model can produce the
   language of grooming, impersonate a peer or an idol, and adapt to the target,
   then the scarce resource in the offense — time, social skill, a convincing
-  identity — is no longer scarce. Detection built for files does not see this;
-  detection built for known grooming scripts will see only the scripts it has.
+  identity — is no longer scarce in the same way. That is already happening, and
+  it is already risky. It is still a person executing their own plan through a
+  model. Detection built for files does not see this; detection built for known
+  grooming scripts will see only the scripts it has. Collapsing this into
+  agent-facilitated offending hides that the agent case is a further step:
+  the plan itself leaving the person.
 
 current_understanding: >-
   Public notes on future threats treat AI as an aid across every avenue of the
-  offense, not only as an image generator. The CAC Ontology has a rich set of
-  impersonation and fabricated-persona classes in the grooming and sextortion
-  modules, and a generative-synthesis affordance on the platforms side that is
-  scoped to media. There is no class for a generative-text or conversational
-  agent used to groom. Threat assessments record rapid growth in AI-generated
-  imagery; comparable public measurement for AI-assisted contact is thinner,
-  which is itself a gap.
+  offense, not only as an image generator — the directed-tool pattern this
+  topic names. The CAC Ontology has a rich set of impersonation and
+  fabricated-persona classes in the grooming and sextortion modules, and a
+  generative-synthesis affordance on the platforms side that is scoped to
+  media. There is no class for generative text used to groom, and no class for
+  a conversational model used as a directed tool. Threat assessments record
+  rapid growth in AI-generated imagery; comparable public measurement for
+  AI-assisted contact is thinner, which is itself a gap. Chatbots that answer
+  a person's prompts belong here. Systems that plan and execute with little
+  turn-by-turn direction belong in Agent-Facilitated and Orchestrated Offending.
 
 open_questions:
-  - What share of contact offending, if any, already involves generated language or a conversational agent, and what public signal would show it?
-  - Do existing impersonation classes cover a model-operated persona, or does the operator being a model change the class?
+  - What share of contact offending, if any, already involves generated language used as a directed tool, and what public signal would show it?
+  - Do existing impersonation classes cover a model-written persona that a person still operates, or does generated language change the class?
   - What would a detection or disruption approach look like that does not require reading the content of private messages?
 
 maturity: emerging
@@ -57,11 +68,12 @@ cac_alignment:
     - https://cacontology.projectvic.org/platforms#GenerativeSynthesis
   notes: >-
     Impersonation, fabricated personas, grooming messages, and generative media
-    synthesis are modelled. What is missing is generative text and conversational
-    agents as a grooming mechanism — a model producing the language or running
-    the persona, rather than a human using a false identity. GenerativeSynthesis
-    is an affordance for synthetic media, not for language. An extension would
-    need a class for model-assisted or model-operated contact.
+    synthesis are modelled. What is missing is generative text used as a directed
+    tool — a model producing the language a person still operates, rather than a
+    human using a false identity they wrote themselves. GenerativeSynthesis is an
+    affordance for synthetic media, not for language. Conversational agents that
+    plan and execute are not this gap; they are the sibling category. An extension
+    here would need a class for model-assisted contact that remains human-directed.
 
 threads:
   - id: class-proposal
@@ -69,9 +81,11 @@ threads:
     detail: >-
       Compare FabricatedPersona, IdentityImpersonation, GroomingMessage, and
       GenerativeSynthesis against the claim that a model can produce grooming
-      language or operate a persona. Write the smallest class or property that
-      would make the distinction checkable, with examples drawn only from public
-      reporting, and a note on what would be out of scope.
+      language a person still directs. Write the smallest class or property that
+      would make directed-tool contact checkable, with examples drawn only from
+      public reporting, and a note on what would be out of scope. Do not fold
+      planning-and-execution agents into this class — that distinction belongs
+      on the agent-facilitated topic.
     kind: ontology
     effort: small
     status: open
@@ -121,6 +135,7 @@ references:
     publisher: "Project VIC International"
 
 related_topics:
+  - agent-facilitated-offending
   - ai-generated-csam
   - platform-affordance-misuse
   - unconstrained-victim-selection

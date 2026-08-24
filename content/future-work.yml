@@ -1,10 +1,10 @@
 # Future work brief — compiled onto the Future Threats tab.
 #
-# The structural shifts and research priorities originate in End Child
-# Exploitation's public notes. Each item is filed against a topic in this
-# tracker where one exists, or against a taxonomy slot that is still empty.
-# That is the point: the tab is a map onto the rest of the tracker, not a
-# second copy of it.
+# The structural shifts and research priorities originate in public notes
+# (End Child Exploitation's Future Threats brief, and later IWF / WeProtect
+# reporting). Each item is filed against a topic in this tracker where one
+# exists, or against a taxonomy slot that is still empty. That is the point:
+# the tab is a map onto the rest of the tracker, not a second copy of it.
 #
 #   https://end-child-exploitation.com/
 
@@ -14,9 +14,10 @@ framing: >-
   As technology evolves and exploitation methods adapt, the offense is no longer
   bounded the way it was in the pre-digital age. Abuse still happens in person;
   what has changed is the resources an offender can reach for — who they can
-  select, how they can be aided, and whether they have to act alone. This tab
-  tracks those structural shifts and the research still needed, filed against
-  topics and ontology classes rather than as a free-standing essay.
+  select, how they can be aided by a model they still direct, whether a system
+  can plan and execute without that direction, and whether they have to act
+  alone. This tab tracks those structural shifts and the research still needed,
+  filed against topics and ontology classes rather than as a free-standing essay.
 
 sources:
   - title: "Future Work & Research Gaps"
@@ -32,8 +33,14 @@ sources:
     type: report
     publisher: "WeProtect Global Alliance"
     date: "2023"
+  - title: "Harm without limits: AI child sexual abuse material through the eyes of our Analysts"
+    url: "https://www.iwf.org.uk/media/hl1nvdti/iwf-ai-csam-report-2026.pdf"
+    type: report
+    publisher: "Internet Watch Foundation"
+    date: "2026"
+    note: "Separates agentic AI (goal-directed, minimal supervision) from prompt-driven generation."
 
-# Four avenues named on the Future Threats note. Cards on the tab.
+# Structural shifts. Cards on the Future Threats tab.
 structural_shifts:
   - id: selection-without-geography
     label: Selection without geography
@@ -48,11 +55,20 @@ structural_shifts:
       the approach adapted to what the profile discloses.
     topic: unconstrained-victim-selection
   - id: ai-as-aid
-    label: AI as an aid across the offense
+    label: AI-Enhanced
     summary: >-
-      Generative models refine methods, produce grooming language, and impersonate
-      trusted figures. Distinct from AI-generated imagery, which is tracked separately.
+      Generative models carry out a request the offender still plans: write this
+      script, impersonate this person, produce this image. Distinct from
+      AI-generated imagery as a production problem, and distinct from agents
+      that plan and execute.
     topic: ai-enabled-grooming
+  - id: agent-as-actor
+    label: Agent-Facilitated and Orchestrated Offending
+    summary: >-
+      Software agents plan, chain actions, and execute with little turn-by-turn
+      direction. This is a step above AI-enhanced offending: the scarce resource
+      is no longer the offender's time or skill.
+    topic: agent-facilitated-offending
   - id: offender-community
     label: Offender community formation
     summary: >-
@@ -65,6 +81,9 @@ research_priorities:
     - id: ai-csam-detection
       label: Deepfake and AI-CSAM prevention and detection
       topic: ai-generated-csam
+    - id: agentic-offending
+      label: Distinguishing agent-facilitated offending from AI as a directed tool
+      topic: agent-facilitated-offending
     - id: predictive-grooming
       label: Predictive detection of grooming behaviour
       topic: pre-harm-detection
@@ -127,6 +146,7 @@ research_priorities:
 
 horizon_questions:
   - How will AI and emerging technologies evolve exploitation methods?
+  - Where does directed use of a model end and a planning-and-execution agent begin, and what would show that the line had been crossed?
   - How can legal frameworks keep pace with rapid technological change?
   - What tools can detect and prevent harm before it occurs?
   - How can privacy, security, and child protection be balanced without collapsing one into another?

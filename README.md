@@ -22,7 +22,7 @@ Each entry is a **topic** — a concept the field actually discusses, not a head
 | **Threads** | Concrete work someone can pick up, each with criteria for what counts as done. |
 | **References** | Public sources, every one openable without credentials. |
 
-Topics are filed under five domains — **Exploitation Vectors**, **Technology**, **Policy & Law Enforcement**, **Research & Data**, and **Future Threats** — and drilled into by category. The navigation is designed so you do not have to explore: if you already know AI is your area, you press Technology, then Generative AI, and you are looking at the work. Future Threats is the horizon view: structural shifts in how the offense works, filed back onto topics and ontology classes.
+Topics are filed under five domains — **Exploitation Vectors**, **Technology**, **Policy & Law Enforcement**, **Research & Data**, and **Future Threats** — and drilled into by category. The navigation is designed so you do not have to explore: if you already know AI is your area, you press Technology, then Generative AI, and you are looking at the work. Future Threats is the horizon view: structural shifts in how the offense works — including the split between AI-enhanced offending and agent-facilitated and orchestrated offending — filed back onto topics and ontology classes.
 
 ## Grounded in the CAC Ontology
 

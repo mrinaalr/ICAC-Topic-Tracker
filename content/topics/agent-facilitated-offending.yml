@@ -1,0 +1,143 @@
+id: agent-facilitated-offending
+label: "Agent-Facilitated and Orchestrated Offending"
+aliases:
+  - "agentic offending"
+  - "autonomous agent-enhanced exploitation"
+  - "planning-and-execution agents"
+
+domain: future-threats
+category: agent-facilitated-offending
+
+definition: >-
+  Offending in which a software agent plans, chains actions, and executes toward
+  a goal with little turn-by-turn direction from a person. An agent uses AI.
+  Using AI does not make the work an agent: a person who prompts a model to
+  write a script or produce an image is still doing AI-enhanced offending. The
+  distinction is who holds the plan and who carries out the next step.
+
+why_it_matters: >-
+  AI-enabled offending is already real and already risky. Agent-facilitated
+  offending is a distinct and higher-elevation threat because it removes the
+  remaining scarce resource: the offender's own time, skill, and attention.
+  A directed request scales with how fast a person can prompt. An agent that
+  can plan and act scales with what the system can run. Detection built for a
+  human-in-the-loop session, and disruption built for taking one operator
+  offline, both assume a person is still doing the work.
+
+current_understanding: >-
+  Public measurement of this pattern is thin because most published figures
+  still collapse "AI" into one bucket. What is established is the tool side:
+  generative models used on a person's own vision — make this image, write this
+  script, impersonate this person — which is tracked here as AI-enabled
+  offending and, for imagery, as AI-generated CSAM. What is newer is the agent
+  side. The Internet Watch Foundation's 2026 analysis defines agentic AI as
+  systems that achieve goals with minimal human supervision, and treats early
+  agentic tools as a separate watch item from prompt-driven generation: tasks
+  that once required sustained technical skill can be handed to an autonomous
+  system. WeProtect's 2025 assessment records chatbots and generative models as
+  already weaponised, without yet splitting planning-and-execution agents from
+  directed generation. The CAC Ontology has classes named Agent, but they type
+  undercover investigators, not offensive software. It models fabricated
+  personas and generative media synthesis. It does not model a planning and
+  executing loop. This topic stays at that structural claim. How such a system
+  would be built or pointed at a child is out of scope.
+
+open_questions:
+  - What public signal would distinguish a directed prompt from a planning-and-execution loop without requiring private session logs?
+  - Do existing persona and synthesis classes cover an agent that operates them, or does the operator being software change the class?
+  - If disruption still targets a person, what happens when the person is no longer the one executing?
+
+maturity: emerging
+
+intervention_point: [platform_prevention, detection_monitoring, prosecution_disruption]
+affordance_class: [contact_approach, production, coordination]
+lifecycle_stage: [initial_contact, maintenance]
+
+cac_alignment:
+  status: partial
+  classes:
+    - https://cacontology.projectvic.org/platforms#GenerativeSynthesis
+    - https://cacontology.projectvic.org/grooming#FabricatedPersona
+    - https://cacontology.projectvic.org/grooming#MultipleAccountGrooming
+    - https://cacontology.projectvic.org/platforms#AffordanceMisuse
+  notes: >-
+    Generative synthesis, fabricated personas, multi-account grooming, and
+    affordance misuse are modelled. Those classes describe tools and human-run
+    deception. They do not describe a software agent that plans and executes.
+    CAC classes named Agent type undercover personnel, not offensive autonomy.
+    An agent uses AI, so GenerativeSynthesis is a substrate, not the concept.
+    An extension would need a class for an offensive planning-and-execution
+    loop that does not collapse into a prompt, a persona, or an investigator.
+
+threads:
+  - id: class-proposal
+    title: "Draft a CAC class for an offensive planning-and-execution agent"
+    detail: >-
+      Contrast GenerativeSynthesis, FabricatedPersona, and the undercover Agent
+      classes against the claim that a system can plan, chain actions, and
+      execute with little turn-by-turn direction. Write the smallest class or
+      property that would make agent-facilitated offending checkable as distinct
+      from AI-enabled offending. Examples only from public reporting. Do not
+      specify how such a system would be built or aimed.
+    kind: ontology
+    effort: small
+    status: open
+    skills: [semantic-web, knowledge-graphs, writing]
+    done_when:
+      - A proposed class or property with a label, definition, and parent
+      - Explicit contrast with GenerativeSynthesis, FabricatedPersona, and undercover Agent classes
+      - "A one-line test: agent implies AI; AI does not imply agent"
+  - id: public-signal
+    title: "Split public AI-CSEA reporting into directed-tool vs planning-and-execution"
+    detail: >-
+      Using only published reports, classify each cited pattern as AI-enabled
+      (the person still plans; the model carries out a directed request) or
+      agent-facilitated (the system plans and executes). Do not reproduce
+      methods, identifiers, or pointers. The output is a sourced coding frame
+      and a residual of what the public record cannot see.
+    kind: threat-intel
+    effort: medium
+    status: open
+    skills: [writing, criminology, policy-analysis]
+    done_when:
+      - A coding frame with inclusion and exclusion rules that implement agent → AI and not AI → agent
+      - A table of public items, each classified as directed-tool, agentic, both, or unclassifiable
+      - "A stated residual: what this inventory cannot see"
+
+references:
+  - title: "Harm without limits: AI child sexual abuse material through the eyes of our Analysts"
+    url: "https://www.iwf.org.uk/media/hl1nvdti/iwf-ai-csam-report-2026.pdf"
+    type: report
+    publisher: "Internet Watch Foundation"
+    date: "2026"
+    note: "Defines agentic AI as goal-directed systems with minimal human supervision, tracked separately from prompt-driven generation."
+  - title: "AI CSAM Report 2026: Harm Without Limits"
+    url: "https://www.iwf.org.uk/about-us/why-we-exist/our-research/how-ai-is-being-abused-to-create-child-sexual-abuse-imagery/"
+    type: report
+    publisher: "Internet Watch Foundation"
+    date: "2026"
+  - title: "Global Threat Assessment 2025"
+    url: "https://www.weprotect.org/wp-content/uploads/GTA-2025_EN.pdf"
+    type: report
+    publisher: "WeProtect Global Alliance"
+    date: "2025"
+    note: "Records chatbots and generative models as already in use; does not yet split agents from directed generation."
+  - title: "Future Threats"
+    url: "https://end-child-exploitation.com/END%20CHILD%20EXPLOITATION/FUTURE%20WORK%20&%20RESEARCH%20GAPS/Future%20Threats%202bca7cd825528065bdedf10b1e37d50b"
+    type: post
+    publisher: "End Child Exploitation"
+    note: "Names AI as an aid across the offense — the directed-tool side of this split."
+  - title: "CAC Ontology"
+    url: "https://github.com/Project-VIC-International/CAC-Ontology"
+    type: ontology
+    publisher: "Project VIC International"
+
+related_topics:
+  - ai-enabled-grooming
+  - ai-generated-csam
+  - platform-affordance-misuse
+  - offender-community-formation
+
+created: "2026-08-24"
+updated: "2026-08-24"
+maintainers: []

@@ -14,7 +14,7 @@
 | Research & Data | What can the field not currently measure? |
 | Future Threats | How has the medium changed the offense, and what research is still missing? |
 
-Future Threats is the horizon view. It is not a sixth filing cabinet for current offense types: a concept that is already a vector, a capability, or a response-system problem stays in those domains. What belongs here is a structural shift — scale of access, AI as an aid, community formation — or a research priority that is not yet a settled topic.
+Future Threats is the horizon view. It is not a sixth filing cabinet for current offense types: a concept that is already a vector, a capability, or a response-system problem stays in those domains. What belongs here is a structural shift — scale of access, AI-enhanced offending, agent-facilitated and orchestrated offending, community formation — or a research priority that is not yet a settled topic.
 
 The Future Threats *tab* is a map onto the rest of the tracker. Each research priority from the public brief is filed against a topic where one exists, or against a taxonomy slot that is still empty. That is how the tab stays queryable rather than becoming a second essay.
 
